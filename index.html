@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Alô Natal - Serviços</title>
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
+        body { background-color: #f4f7f6; color: #333; display: flex; justify-content: center; }
+        
+        .app-container { width: 100%; max-width: 400px; background-color: #ffffff; min-height: 100vh; box-shadow: 0 0 20px rgba(0,0,0,0.1); position: relative; }
+        
+        .header { background: linear-gradient(135deg, #005b96, #003f6b); color: white; padding: 30px 20px 20px; text-align: center; border-bottom-left-radius: 20px; border-bottom-right-radius: 20px; }
+        .header h1 { font-size: 24px; margin-bottom: 5px; color: #ffc107; }
+        .header p { font-size: 14px; font-weight: 300; }
+        
+        .search-bar { margin: -15px 20px 20px; background: white; border-radius: 25px; padding: 10px 15px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); display: flex; align-items: center; border: 1px solid #e0e0e0; }
+        .search-bar input { border: none; outline: none; width: 100%; font-size: 16px; margin-left: 10px; }
+        
+        .section-title { padding: 0 20px; font-size: 14px; color: #666; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 15px; font-weight: bold; }
+        
+        .category-list { padding: 0 20px; display: flex; flex-direction: column; gap: 12px; }
+        
+        .category-btn { display: flex; align-items: center; background: white; border: 2px solid #eef2f5; border-radius: 15px; padding: 15px; cursor: pointer; transition: all 0.3s ease; text-align: left; }
+        .category-btn:hover { border-color: #005b96; background-color: #f8fbff; }
+        .category-icon { font-size: 24px; margin-right: 15px; width: 40px; text-align: center; }
+        .category-info h3 { font-size: 16px; color: #333; margin-bottom: 2px; }
+        .category-info p { font-size: 12px; color: #888; }
+        
+        .footer-btn-container { position: fixed; bottom: 0; width: 100%; max-width: 400px; padding: 20px; background: white; box-shadow: 0 -2px 10px rgba(0,0,0,0.05); }
+        .btn-primary { width: 100%; background-color: #e65100; color: white; border: none; padding: 15px; border-radius: 25px; font-size: 16px; font-weight: bold; cursor: pointer; text-transform: uppercase; }
+        
+        .spacer { height: 100px; }
+    </style>
+</head>
+<body>
+
+<div class="app-container">
+    
+    <div class="header">
+        <h1>☀️ Alô Natal</h1>
+        <p>O melhor clube de serviços da cidade</p>
+    </div>
+
+    <div class="search-bar">
+        🔍 <input type="text" placeholder="Buscar serviços em Natal...">
+    </div>
+
+    <h2 class="section-title">Escolha a Categoria:</h2>
+
+    <div class="category-list">
+        <button class="category-btn" onclick="selecionarCategoria('Servente / Ajudante')">
+            <span class="category-icon">🪵</span>
+            <div class="category-info">
+                <h3>Servente / Ajudante</h3>
+                <p>Limpeza de entulho, diárias e cargas</p>
+            </div>
+        </button>
+
+        <button class="category-btn" onclick="selecionarCategoria('Diarista / Faxineira')">
+            <span class="category-icon">🧹</span>
+            <div class="category-info">
+                <h3>Diarista / Faxineira</h3>
+                <p>Limpeza comum, pesada ou pós-obra</p>
+            </div>
+        </button>
+
+        <button class="category-btn" onclick="selecionarCategoria('Marido de Aluguel')">
+            <span class="category-icon">🛠️</span>
+            <div class="category-info">
+                <h3>Marido de Aluguel</h3>
+                <p>Pequenos reparos e instalações</p>
+            </div>
+        </button>
+
+        <button class="category-btn" onclick="selecionarCategoria('Montador de Móveis')">
+            <span class="category-icon">🪑</span>
+            <div class="category-info">
+                <h3>Montador de Móveis</h3>
+                <p>Montagem e desmontagem em geral</p>
+            </div>
+        </button>
+
+        <button class="category-btn" onclick="selecionarCategoria('Eletricista')">
+            <span class="category-icon">⚡</span>
+            <div class="category-info">
+                <h3>Eletricista Residencial</h3>
+                <p>Reparos, chuveiros e fiação</p>
+            </div>
+        </button>
+
+        <button class="category-btn" onclick="selecionarCategoria('Encanador')">
+            <span class="category-icon">🚰</span>
+            <div class="category-info">
+                <h3>Encanador</h3>
+                <p>Vazamentos e desentupimentos</p>
+            </div>
+        </button>
+
+        <button class="category-btn" onclick="selecionarCategoria('Ar-Condicionado')">
+            <span class="category-icon">❄️</span>
+            <div class="category-info">
+                <h3>Ar-Condicionado</h3>
+                <p>Instalação, limpeza e manutenção</p>
+            </div>
+        </button>
+
+        <button class="category-btn" onclick="selecionarCategoria('Jardineiro')">
+            <span class="category-icon">🌱</span>
+            <div class="category-info">
+                <h3>Jardineiro</h3>
+                <p>Poda, limpeza de quintal e paisagismo</p>
+            </div>
+        </button>
+
+        <button class="category-btn" onclick="selecionarCategoria('Pedreiro')">
+            <span class="category-icon">🧱</span>
+            <div class="category-info">
+                <h3>Pedreiro</h3>
+                <p>Reformas, pisos e revestimentos</p>
+            </div>
+        </button>
+
+        <button class="category-btn" onclick="selecionarCategoria('Gesseiro')">
+            <span class="category-icon">🏗️</span>
+            <div class="category-info">
+                <h3>Gesseiro</h3>
+                <p>Forros, paredes 3D e molduras</p>
+            </div>
+        </button>
+
+        <button class="category-btn" onclick="selecionarCategoria('Pintor Residencial')">
+            <span class="category-icon">🖌️</span>
+            <div class="category-info">
+                <h3>Pintor Residencial</h3>
+                <p>Pintura interna, externa e texturas</p>
+            </div>
+        </button>
+    </div>
+
+    <div class="spacer"></div>
+
+    <div class="footer-btn-container">
+        <button class="btn-primary" id="btn-proximo" style="opacity: 0.5; pointer-events: none;">Próximo Passo</button>
+    </div>
+
+</div>
+
+<script>
+    let categoriaSelecionada = '';
+
+    function selecionarCategoria(nome) {
+        categoriaSelecionada = nome;
+        
+        const botoes = document.querySelectorAll('.category-btn');
+        botoes.forEach(btn => {
+            btn.style.borderColor = '#eef2f5';
+            btn.style.backgroundColor = 'white';
+        });
+
+        const botaoClicado = event.currentTarget;
+        botaoClicado.style.borderColor = '#005b96';
+        botaoClicado.style.backgroundColor = '#f8fbff';
+
+        const btnProximo = document.getElementById('btn-proximo');
+        btnProximo.style.opacity = '1';
+        btnProximo.style.pointerEvents = 'auto';
+        btnProximo.innerText = `Continuar com ${nome}`;
+    }
+
+    document.getElementById('btn-proximo').addEventListener('click', function() {
+        if(categoriaSelecionada) {
+            alert(`Avançando para as subcategorias de: ${categoriaSelecionada}. (Aqui o app carregará a próxima tela!)`);
+        }
+    });
+</script>
+
+</body>
+</html>
