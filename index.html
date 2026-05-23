@@ -3,41 +3,74 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Alô Natal - Serviços</title>
+    <title>Alô Natal - App Cliente</title>
     <style>
+        /* Reset e Base */
         * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
         body { background-color: #f4f7f6; color: #333; display: flex; justify-content: center; }
         
-        .app-container { width: 100%; max-width: 400px; background-color: #ffffff; min-height: 100vh; box-shadow: 0 0 20px rgba(0,0,0,0.1); position: relative; }
+        .app-container { width: 100%; max-width: 400px; background-color: #ffffff; min-height: 100vh; box-shadow: 0 0 20px rgba(0,0,0,0.1); position: relative; overflow-x: hidden; }
         
-        .header { background: linear-gradient(135deg, #005b96, #003f6b); color: white; padding: 30px 20px 20px; text-align: center; border-bottom-left-radius: 20px; border-bottom-right-radius: 20px; }
-        .header h1 { font-size: 24px; margin-bottom: 5px; color: #ffc107; }
-        .header p { font-size: 14px; font-weight: 300; }
+        /* Cabeçalho Home */
+        .header-home { background: linear-gradient(135deg, #005b96, #003f6b); color: white; padding: 30px 20px 20px; text-align: center; border-bottom-left-radius: 20px; border-bottom-right-radius: 20px; }
+        .header-home h1 { font-size: 24px; margin-bottom: 5px; color: #ffc107; }
+        .header-home p { font-size: 14px; font-weight: 300; }
         
+        /* Cabeçalho Pedido */
+        .header-pedido { background: linear-gradient(135deg, #005b96, #003f6b); color: white; padding: 20px; display: flex; align-items: center; border-bottom-left-radius: 20px; border-bottom-right-radius: 20px; }
+        .back-btn { background: none; border: none; color: white; font-size: 24px; cursor: pointer; margin-right: 15px; }
+        .header-pedido h1 { font-size: 20px; color: #ffc107; }
+        .header-pedido p { font-size: 13px; font-weight: 300; }
+
+        /* Barra de Busca */
         .search-bar { margin: -15px 20px 20px; background: white; border-radius: 25px; padding: 10px 15px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); display: flex; align-items: center; border: 1px solid #e0e0e0; }
         .search-bar input { border: none; outline: none; width: 100%; font-size: 16px; margin-left: 10px; }
         
         .section-title { padding: 0 20px; font-size: 14px; color: #666; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 15px; font-weight: bold; }
         
+        /* Lista de Categorias */
         .category-list { padding: 0 20px; display: flex; flex-direction: column; gap: 12px; }
-        
         .category-btn { display: flex; align-items: center; background: white; border: 2px solid #eef2f5; border-radius: 15px; padding: 15px; cursor: pointer; transition: all 0.3s ease; text-align: left; }
         .category-btn:hover { border-color: #005b96; background-color: #f8fbff; }
         .category-icon { font-size: 24px; margin-right: 15px; width: 40px; text-align: center; }
         .category-info h3 { font-size: 16px; color: #333; margin-bottom: 2px; }
         .category-info p { font-size: 12px; color: #888; }
         
-        .footer-btn-container { position: fixed; bottom: 0; width: 100%; max-width: 400px; padding: 20px; background: white; box-shadow: 0 -2px 10px rgba(0,0,0,0.05); }
+        /* Formulário de Pedido */
+        .form-section { padding: 25px 20px; }
+        .form-group { margin-bottom: 20px; }
+        .form-label { font-size: 14px; font-weight: bold; color: #005b96; margin-bottom: 8px; display: block; text-transform: uppercase; }
+        .custom-select { width: 100%; padding: 15px; border: 2px solid #eef2f5; border-radius: 12px; font-size: 16px; color: #333; background-color: #f8fbff; outline: none; }
+        
+        /* Contador */
+        .counter-container { display: flex; align-items: center; background: #f8fbff; border: 2px solid #eef2f5; border-radius: 12px; overflow: hidden; width: 150px; }
+        .counter-btn { flex: 1; background: none; border: none; padding: 12px; font-size: 20px; color: #005b96; cursor: pointer; font-weight: bold; }
+        .counter-display { flex: 1; text-align: center; font-size: 18px; font-weight: bold; border-left: 2px solid #eef2f5; border-right: 2px solid #eef2f5; padding: 10px 0; }
+        
+        /* Textarea */
+        .custom-textarea { width: 100%; padding: 15px; border: 2px solid #eef2f5; border-radius: 12px; font-size: 14px; color: #333; background-color: #f8fbff; outline: none; resize: none; height: 100px; }
+        
+        /* Rodapé Fixado */
+        .footer-btn-container { position: fixed; bottom: 0; width: 100%; max-width: 400px; padding: 20px; background: white; box-shadow: 0 -2px 10px rgba(0,0,0,0.05); z-index: 10; }
         .btn-primary { width: 100%; background-color: #e65100; color: white; border: none; padding: 15px; border-radius: 25px; font-size: 16px; font-weight: bold; cursor: pointer; text-transform: uppercase; }
         
-        .spacer { height: 100px; }
+        .spacer { height: 110px; }
+
+        /* Tela de Radar */
+        .radar-screen { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 43, 73, 0.95); display: none; flex-direction: column; justify-content: center; align-items: center; color: white; z-index: 999; text-align: center; padding: 20px; }
+        .radar { width: 100px; height: 100px; background: rgba(255, 193, 7, 0.2); border-radius: 50%; border: 2px solid #ffc107; display: flex; justify-content: center; align-items: center; position: relative; animation: pulse 1.5s infinite; margin-bottom: 20px; }
+        .radar-icon { font-size: 40px; }
+        @keyframes pulse {
+            0% { transform: scale(0.9); box-shadow: 0 0 0 0 rgba(255, 193, 7, 0.7); }
+            70% { transform: scale(1.1); box-shadow: 0 0 0 20px rgba(255, 193, 7, 0); }
+            100% { transform: scale(0.9); box-shadow: 0 0 0 0 rgba(255, 193, 7, 0); }
+        }
     </style>
 </head>
 <body>
 
-<div class="app-container">
-    
-    <div class="header">
+<div class="app-container" id="tela-categorias">
+    <div class="header-home">
         <h1>☀️ Alô Natal</h1>
         <p>O melhor clube de serviços da cidade</p>
     </div>
@@ -49,7 +82,8 @@
     <h2 class="section-title">Escolha a Categoria:</h2>
 
     <div class="category-list">
-        <button class="category-btn" onclick="selecionarCategoria('Servente / Ajudante')">
+        
+        <button class="category-btn" onclick="selecionarCategoria('Servente / Ajudante', '🪵')">
             <span class="category-icon">🪵</span>
             <div class="category-info">
                 <h3>Servente / Ajudante</h3>
@@ -57,7 +91,7 @@
             </div>
         </button>
 
-        <button class="category-btn" onclick="selecionarCategoria('Diarista / Faxineira')">
+        <button class="category-btn" onclick="selecionarCategoria('Diarista / Faxineira', '🧹')">
             <span class="category-icon">🧹</span>
             <div class="category-info">
                 <h3>Diarista / Faxineira</h3>
@@ -65,7 +99,7 @@
             </div>
         </button>
 
-        <button class="category-btn" onclick="selecionarCategoria('Marido de Aluguel')">
+        <button class="category-btn" onclick="selecionarCategoria('Marido de Aluguel', '🛠️')">
             <span class="category-icon">🛠️</span>
             <div class="category-info">
                 <h3>Marido de Aluguel</h3>
@@ -73,7 +107,7 @@
             </div>
         </button>
 
-        <button class="category-btn" onclick="selecionarCategoria('Montador de Móveis')">
+        <button class="category-btn" onclick="selecionarCategoria('Montador de Móveis', '🪑')">
             <span class="category-icon">🪑</span>
             <div class="category-info">
                 <h3>Montador de Móveis</h3>
@@ -81,7 +115,15 @@
             </div>
         </button>
 
-        <button class="category-btn" onclick="selecionarCategoria('Eletricista')">
+        <button class="category-btn" onclick="selecionarCategoria('Chaveiro', '🔑')">
+            <span class="category-icon">🔑</span>
+            <div class="category-info">
+                <h3>Chaveiro</h3>
+                <p>Abertura de portas, cópias e fechaduras</p>
+            </div>
+        </button>
+
+        <button class="category-btn" onclick="selecionarCategoria('Eletricista Residencial', '⚡')">
             <span class="category-icon">⚡</span>
             <div class="category-info">
                 <h3>Eletricista Residencial</h3>
@@ -89,7 +131,7 @@
             </div>
         </button>
 
-        <button class="category-btn" onclick="selecionarCategoria('Encanador')">
+        <button class="category-btn" onclick="selecionarCategoria('Encanador', '🚰')">
             <span class="category-icon">🚰</span>
             <div class="category-info">
                 <h3>Encanador</h3>
@@ -97,7 +139,7 @@
             </div>
         </button>
 
-        <button class="category-btn" onclick="selecionarCategoria('Ar-Condicionado')">
+        <button class="category-btn" onclick="selecionarCategoria('Ar-Condicionado', '❄️')">
             <span class="category-icon">❄️</span>
             <div class="category-info">
                 <h3>Ar-Condicionado</h3>
@@ -105,7 +147,7 @@
             </div>
         </button>
 
-        <button class="category-btn" onclick="selecionarCategoria('Jardineiro')">
+        <button class="category-btn" onclick="selecionarCategoria('Jardineiro', '🌱')">
             <span class="category-icon">🌱</span>
             <div class="category-info">
                 <h3>Jardineiro</h3>
@@ -113,15 +155,23 @@
             </div>
         </button>
 
-        <button class="category-btn" onclick="selecionarCategoria('Pedreiro')">
+        <button class="category-btn" onclick="selecionarCategoria('Eventos e Locação', '🎉')">
+            <span class="category-icon">🎉</span>
+            <div class="category-info">
+                <h3>Eventos e Locação</h3>
+                <p>Mesas, cadeiras, brinquedos e festas</p>
+            </div>
+        </button>
+
+        <button class="category-btn" onclick="selecionarCategoria('Pedreiro', '🧱')">
             <span class="category-icon">🧱</span>
             <div class="category-info">
                 <h3>Pedreiro</h3>
                 <p>Reformas, pisos e revestimentos</p>
             </div>
         </button>
-
-        <button class="category-btn" onclick="selecionarCategoria('Gesseiro')">
+        
+        <button class="category-btn" onclick="selecionarCategoria('Gesseiro', '🏗️')">
             <span class="category-icon">🏗️</span>
             <div class="category-info">
                 <h3>Gesseiro</h3>
@@ -129,38 +179,91 @@
             </div>
         </button>
 
-        <button class="category-btn" onclick="selecionarCategoria('Pintor Residencial')">
+        <button class="category-btn" onclick="selecionarCategoria('Pintor Residencial', '🖌️')">
             <span class="category-icon">🖌️</span>
             <div class="category-info">
                 <h3>Pintor Residencial</h3>
                 <p>Pintura interna, externa e texturas</p>
             </div>
         </button>
+
     </div>
 
     <div class="spacer"></div>
 
     <div class="footer-btn-container">
-        <button class="btn-primary" id="btn-proximo" style="opacity: 0.5; pointer-events: none;">Próximo Passo</button>
+        <button class="btn-primary" id="btn-proximo" style="opacity: 0.5; pointer-events: none;" onclick="avancarParaPedido()">Próximo Passo</button>
+    </div>
+</div>
+
+<div class="app-container" id="tela-pedido" style="display: none;">
+    <div class="header-pedido">
+        <button class="back-btn" onclick="voltarParaCategorias()">←</button>
+        <div class="header-title">
+            <h1 id="titulo-pedido">Serviço</h1>
+            <p>Detalhes do pedido</p>
+        </div>
     </div>
 
+    <div class="form-section">
+        <div class="form-group">
+            <label class="form-label">1. O que você precisa?</label>
+            <select class="custom-select" id="subcategoria">
+                <option value="geral">Serviço Geral na Categoria</option>
+                <option value="especifico">Serviço Específico / Urgência</option>
+                <option value="orcamento">Apenas Orçamento</option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label class="form-label">2. Quantidade (Unidades/Cômodos)?</label>
+            <div class="counter-container">
+                <button class="counter-btn" onclick="mudarQuantidade(-1)">-</button>
+                <div class="counter-display" id="quantidade">1</div>
+                <button class="counter-btn" onclick="mudarQuantidade(1)">+</button>
+            </div>
+            <p style="font-size: 12px; color: #888; margin-top: 5px;">*Isso ajuda a calcular o custo em créditos.</p>
+        </div>
+
+        <div class="form-group">
+            <label class="form-label">3. Observações (Opcional)</label>
+            <textarea class="custom-textarea" placeholder="Descreva detalhes adicionais sobre o serviço..."></textarea>
+        </div>
+    </div>
+
+    <div class="footer-btn-container">
+        <button class="btn-primary" onclick="buscarProfissionais()">
+            📍 Buscar Profissionais
+        </button>
+    </div>
+</div>
+
+<div class="radar-screen" id="telaRadar">
+    <div class="radar">
+        <span class="radar-icon">📍</span>
+    </div>
+    <h2>Buscando Parceiros...</h2>
+    <p>Buscando profissionais na sua região usando o GPS.</p>
 </div>
 
 <script>
     let categoriaSelecionada = '';
+    let iconeSelecionado = '';
+    let quantidadeAtual = 1;
 
-    function selecionarCategoria(nome) {
+    // Ação 1: Selecionar Categoria
+    function selecionarCategoria(nome, icone) {
         categoriaSelecionada = nome;
+        iconeSelecionado = icone;
         
-        const botoes = document.querySelectorAll('.category-btn');
+        const botoes = document.querySelectorAll('#tela-categorias .category-btn');
         botoes.forEach(btn => {
             btn.style.borderColor = '#eef2f5';
             btn.style.backgroundColor = 'white';
         });
 
-        const botaoClicado = event.currentTarget;
-        botaoClicado.style.borderColor = '#005b96';
-        botaoClicado.style.backgroundColor = '#f8fbff';
+        event.currentTarget.style.borderColor = '#005b96';
+        event.currentTarget.style.backgroundColor = '#f8fbff';
 
         const btnProximo = document.getElementById('btn-proximo');
         btnProximo.style.opacity = '1';
@@ -168,11 +271,49 @@
         btnProximo.innerText = `Continuar com ${nome}`;
     }
 
-    document.getElementById('btn-proximo').addEventListener('click', function() {
-        if(categoriaSelecionada) {
-            alert(`Avançando para as subcategorias de: ${categoriaSelecionada}. (Aqui o app carregará a próxima tela!)`);
+    // Ação 2: Clicar em Continuar e pedir GPS
+    function avancarParaPedido() {
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(function(posicao) {
+                // GPS Liberado! Oculta Tela 1, Mostra Tela 2
+                document.getElementById('tela-categorias').style.display = 'none';
+                document.getElementById('tela-pedido').style.display = 'block';
+                
+                // Atualiza o Título da Tela 2
+                document.getElementById('titulo-pedido').innerText = `${iconeSelecionado} ${categoriaSelecionada}`;
+                
+            }, function(erro) {
+                alert("Para encontrar o profissional ideal perto de você, por favor, permita o acesso ao GPS!");
+            });
+        } else {
+            alert("O GPS não é suportado pelo seu navegador.");
         }
-    });
+    }
+
+    // Ação 3: Botão Voltar
+    function voltarParaCategorias() {
+        document.getElementById('tela-pedido').style.display = 'none';
+        document.getElementById('tela-categorias').style.display = 'block';
+    }
+
+    // Ação 4: Contador de Quantidade
+    function mudarQuantidade(valor) {
+        quantidadeAtual += valor;
+        if (quantidadeAtual < 1) quantidadeAtual = 1;
+        if (quantidadeAtual > 10) quantidadeAtual = 10;
+        document.getElementById('quantidade').innerText = quantidadeAtual;
+    }
+
+    // Ação 5: Botão Final (Buscar Radar)
+    function buscarProfissionais() {
+        const telaRadar = document.getElementById('telaRadar');
+        telaRadar.style.display = 'flex';
+        
+        setTimeout(() => {
+            telaRadar.style.display = 'none';
+            alert('🎉 Profissionais localizados na sua região! O chat será aberto.');
+        }, 4000);
+    }
 </script>
 
 </body>
