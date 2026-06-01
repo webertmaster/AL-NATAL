@@ -37,7 +37,6 @@
             display: flex; flex-direction: column;
         }
         
-        /* Cabeçalhos */
         .header-home { 
             background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%); 
             color: white; padding: 40px 24px 32px; text-align: center; 
@@ -63,7 +62,6 @@
         .header-title h1 { font-size: 18px; font-weight: 600; color: white; }
         .header-title p { font-size: 13px; opacity: 0.8; }
 
-        /* Barra de Busca */
         .search-bar { 
             margin: -20px 24px 24px; background: var(--bg-card); border-radius: 16px; 
             padding: 14px 18px; box-shadow: var(--shadow-lg); display: flex; align-items: center; 
@@ -74,7 +72,6 @@
         
         .section-title { padding: 0 24px; font-size: 13px; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.8px; margin-bottom: 16px; font-weight: 600; }
         
-        /* Lista de Categorias */
         .category-list { padding: 0 24px 120px; display: flex; flex-direction: column; gap: 12px; }
         .category-btn { 
             display: flex; align-items: center; background: var(--bg-card); 
@@ -96,9 +93,7 @@
         .category-info p { font-size: 13px; color: var(--text-muted); line-height: 1.3; }
         .category-arrow { color: var(--text-muted); font-size: 20px; margin-left: 8px; }
         .category-btn.has-sub .category-arrow::after { content: '›'; font-size: 28px; font-weight: 300; }
-        .category-btn:not(.has-sub) .category-arrow::after { content: '✓'; font-size: 18px; color: var(--success); font-weight: 600; }
 
-        /* Formulário de Pedido */
         .form-section { padding: 24px; flex: 1; padding-bottom: 120px; }
         .form-group { margin-bottom: 24px; }
         .form-label { font-size: 13px; font-weight: 600; color: var(--primary); margin-bottom: 8px; display: block; text-transform: uppercase; letter-spacing: 0.5px; }
@@ -113,14 +108,12 @@
         .custom-select:focus, .custom-textarea:focus, .custom-input:focus { border-color: var(--primary); box-shadow: 0 0 0 3px rgba(0, 91, 150, 0.1); }
         .custom-textarea { resize: none; height: 100px; }
         
-        /* Contador */
         .counter-container { display: flex; align-items: center; background: var(--bg-card); border: 1px solid var(--border); border-radius: 12px; overflow: hidden; width: 140px; box-shadow: var(--shadow-sm); }
         .counter-btn { flex: 1; background: none; border: none; padding: 14px; font-size: 20px; color: var(--primary); cursor: pointer; font-weight: 600; transition: background 0.2s; }
         .counter-btn:hover { background: #f1f5f9; }
         .counter-btn:active { background: #e2e8f0; }
         .counter-display { flex: 1; text-align: center; font-size: 16px; font-weight: 600; border-left: 1px solid var(--border); border-right: 1px solid var(--border); padding: 14px 0; color: var(--text-main); }
         
-        /* Botões */
         .footer-btn-container { position: fixed; bottom: 0; width: 100%; max-width: 480px; padding: 20px 24px 32px; background: rgba(255,255,255,0.95); backdrop-filter: blur(8px); border-top: 1px solid var(--border); z-index: 50; }
         .btn-primary { 
             width: 100%; background-color: var(--action); color: white; border: none; 
@@ -140,7 +133,6 @@
         .btn-secondary:hover:not(:disabled) { background-color: var(--primary-dark); }
         .btn-secondary:disabled { background-color: #cbd5e1; color: #94a3b8; cursor: not-allowed; }
 
-        /* Fallback de Localização */
         .location-status { font-size: 13px; color: var(--text-muted); margin: 8px 0 12px; min-height: 20px; display: flex; align-items: center; gap: 6px; }
         .fallback-manual { animation: slideDown 0.3s ease-out; }
         .location-confirmed { 
@@ -148,14 +140,19 @@
             border-radius: 12px; font-size: 14px; font-weight: 500; 
             border: 1px solid #a7f3d0; display: flex; justify-content: space-between; align-items: center; gap: 12px;
         }
-        .btn-alterar { background: none; border: none; color: #047857; text-decoration: underline; cursor: pointer; font-size: 13px; font-weight: 600; white-space: nowrap; }
+        .btn-alterar { 
+            background: none; border: 1px solid #047857; color: #047857; 
+            padding: 6px 12px; border-radius: 8px; cursor: pointer; 
+            font-size: 13px; font-weight: 600; white-space: nowrap;
+            transition: all 0.2s;
+        }
+        .btn-alterar:hover { background: #047857; color: white; }
 
         @keyframes slideDown {
             from { opacity: 0; transform: translateY(-10px); }
             to { opacity: 1; transform: translateY(0); }
         }
 
-        /* Tela de Radar */
         .radar-screen { 
             position: fixed; top: 0; left: 0; width: 100%; height: 100%; 
             background: rgba(15, 23, 42, 0.85); backdrop-filter: blur(6px);
@@ -183,7 +180,6 @@
 </head>
 <body>
 
-<!-- TELA 1: CATEGORIAS -->
 <div class="app-container" id="tela-categorias">
     <div class="header-home">
         <h1>☀️ Alô Natal</h1>
@@ -197,16 +193,13 @@
 
     <h2 class="section-title">Escolha a Categoria:</h2>
 
-    <div class="category-list" id="lista-categorias">
-        <!-- Preenchida via JavaScript -->
-    </div>
+    <div class="category-list" id="lista-categorias"></div>
 
     <div class="footer-btn-container">
         <button class="btn-primary" id="btn-proximo" disabled onclick="avancarParaPedido()">Próximo Passo</button>
     </div>
 </div>
 
-<!-- TELA 2: SUBCATEGORIAS -->
 <div class="app-container" id="tela-subcategorias" style="display: none;">
     <div class="header-sub">
         <button class="back-btn" onclick="voltarParaCategorias()">←</button>
@@ -217,13 +210,10 @@
     </div>
 
     <div class="form-section" style="padding-bottom: 40px;">
-        <div class="category-list" id="lista-subcategorias" style="padding: 0;">
-            <!-- Preenchida via JavaScript -->
-        </div>
+        <div class="category-list" id="lista-subcategorias" style="padding: 0;"></div>
     </div>
 </div>
 
-<!-- TELA 3: PEDIDO -->
 <div class="app-container" id="tela-pedido" style="display: none;">
     <div class="header-pedido">
         <button class="back-btn" onclick="voltarDaTelaPedido()">←</button>
@@ -234,7 +224,6 @@
     </div>
 
     <div class="form-section">
-        <!-- Localização com Fallback -->
         <div class="form-group" id="location-group">
             <label class="form-label">📍 Localização do Serviço</label>
             <button id="btn-gps" class="btn-secondary" onclick="solicitarLocalizacao()">
@@ -243,13 +232,13 @@
             <p id="location-status" class="location-status"></p>
             
             <div id="fallback-manual" class="fallback-manual" style="display: none;">
-                <p style="font-size: 13px; color: var(--action); margin-bottom: 10px; font-weight: 600;">⚠️ Não foi possível acessar o GPS. Sem problemas!</p>
+                <p style="font-size: 13px; color: var(--action); margin-bottom: 10px; font-weight: 600;">️ Não foi possível acessar o GPS. Sem problemas!</p>
                 <input type="text" id="input-local" class="custom-input" placeholder="Ex: Lagoa Nova, Natal-RN" style="margin-bottom: 12px;">
                 <button class="btn-secondary" style="background-color: var(--success);" onclick="confirmarLocalizacaoManual()">Confirmar Bairro/CEP</button>
             </div>
 
             <div id="local-confirmado" class="location-confirmed" style="display: none;">
-                <span>✅ <strong id="texto-local-confirmado"></strong></span>
+                <span>📍 <strong id="texto-local-confirmado"></strong></span>
                 <button class="btn-alterar" onclick="resetarLocalizacao()">Alterar</button>
             </div>
         </div>
@@ -277,7 +266,7 @@
 
         <div class="form-group">
             <label class="form-label">3. Observações (Opcional)</label>
-            <textarea class="custom-textarea" placeholder="Descreva detalhes adicionais sobre o serviço, como ponto de referência ou materiais necessários..."></textarea>
+            <textarea class="custom-textarea" placeholder="Descreva detalhes adicionais sobre o serviço..."></textarea>
         </div>
     </div>
 
@@ -288,7 +277,6 @@
     </div>
 </div>
 
-<!-- TELA 4: RADAR -->
 <div class="radar-screen" id="telaRadar">
     <div class="radar">
         <span class="radar-icon">📍</span>
@@ -298,72 +286,31 @@
 </div>
 
 <script>
-    // ============================================
-    // BANCO DE DADOS DE CATEGORIAS
-    // ============================================
     const CATEGORIAS = {
-        // ===== CATEGORIAS SIMPLES (sem sub) =====
-        'Servente / Ajudante': { icone: '🪵', desc: 'Limpeza de entulho, diárias e cargas', sub: null },
-        'Diarista / Faxineira': { icone: '🧹', desc: 'Limpeza comum, pesada ou pós-obra', sub: null },
-        'Assistência Domiciliar': { icone: '🛠️', desc: 'Pequenos reparos e instalações', sub: null },
-        'Montador de Móveis': { icone: '🪑', desc: 'Montagem e desmontagem em geral', sub: null },
-        'Chaveiro': { icone: '🔑', desc: 'Abertura de portas, cópias e fechaduras', sub: null },
-        'Eletricista Residencial': { icone: '⚡', desc: 'Reparos, chuveiros e fiação', sub: null },
-        'Encanador': { icone: '🚰', desc: 'Vazamentos e desentupimentos', sub: null },
-        'Ar-Condicionado': { icone: '❄️', desc: 'Instalação, limpeza e manutenção', sub: null },
-        'Jardineiro': { icone: '🌱', desc: 'Poda, limpeza de quintal e paisagismo', sub: null },
-        'Eventos e Locação': { icone: '🎉', desc: 'Mesas, cadeiras, brinquedos e festas', sub: null },
-        'Pedreiro': { icone: '🧱', desc: 'Reformas, pisos e revestimentos', sub: null },
-        'Gesseiro': { icone: '🏗️', desc: 'Forros, paredes 3D e molduras', sub: null },
-        'Pintor Residencial': { icone: '🖌️', desc: 'Pintura interna, externa e texturas', sub: null },
-        'Dedetizador': { icone: '🪳', desc: 'Desinsetização e controle de pragas', sub: null },
-
-        // ===== CATEGORIAS COM SUBCATEGORIAS =====
-        'Marceneiro': { 
-            icone: '🪚', 
-            desc: 'Móveis e reparos em madeira', 
-            sub: ['Móveis sob medida', 'Cozinhas planejadas', 'Reparos em móveis', 'Portas e rodapés']
-        },
-        'Serralheiro': {
-            icone: '⛓️',
-            desc: 'Estruturas metálicas e portões',
-            sub: ['Portões e grades', 'Corrimãos', 'Estruturas metálicas', 'Soldas e reparos']
-        },
-        'Viagens': {
-            icone: '🚗',
-            desc: 'Motorista particular e deslocamentos',
-            sub: ['Motorista particular', 'Viagens intermunicipais', 'Leva e traz', 'Viagens longas']
-        },
-        'Tosa Pet': {
-            icone: '🐕',
-            desc: 'Cuidados com seu pet',
-            sub: ['Tosa higiênica', 'Tosa completa', 'Banho', 'Táxi pet / Veterinário']
-        },
-        'Beleza': {
-            icone: '💇',
-            desc: 'Serviços de beleza em casa',
-            sub: ['Manicure / Pedicure', 'Cabelo (corte/escova)', 'Design de sobrancelha', 'Maquiagem', 'Depilação', 'Massagem relaxante']
-        },
-        'Vidraceiro': {
-            icone: '🪟',
-            desc: 'Vidros, espelhos e box',
-            sub: ['Box de banheiro', 'Espelhos', 'Janelas e portas de vidro', 'Vidros temperados']
-        },
-        'Técnico em Informática': {
-            icone: '🖥️',
-            desc: 'Reparos e suporte em computadores',
-            sub: ['Formatação e Windows', 'Remoção de Vírus', 'Upgrade / Lentidão', 'Redes e Wi-Fi', 'Backup de Dados', 'Instalação de Programas']
-        },
-        'Personal Trainer': {
-            icone: '💪',
-            desc: 'Treinamento físico personalizado',
-            sub: ['Musculação / Funcional', 'Pilates / Yoga', 'Treino para Gestantes', 'Treino para Idosos', 'Emagrecimento', 'Reabilitação / Fisioterapia']
-        }
+        'Servente / Ajudante': { icone: '🪵', desc: 'Limpeza de entulho, diárias e cargas', sub: ['Limpeza de entulho', 'Carga e descarga', 'Diárias gerais', 'Ajuda em mudanças', 'Remoção de móveis'] },
+        'Diarista / Faxineira': { icone: '🧹', desc: 'Limpeza comum, pesada ou pós-obra', sub: ['Limpeza comum', 'Limpeza pesada', 'Limpeza pós-obra', 'Limpeza de apartamentos', 'Limpeza de casas'] },
+        'Assistência Domiciliar': { icone: '🛠️', desc: 'Pequenos reparos e instalações', sub: ['Pequenos reparos', 'Instalações diversas', 'Troca de lâmpadas', 'Consertos gerais', 'Ajustes domésticos'] },
+        'Montador de Móveis': { icone: '🪑', desc: 'Montagem e desmontagem em geral', sub: ['Montagem de móveis', 'Desmontagem para mudança', 'Ajustes e reparos', 'Instalação de prateleiras', 'Montagem de armários'] },
+        'Chaveiro': { icone: '🔑', desc: 'Abertura de portas, cópias e fechaduras', sub: ['Abertura de portas', 'Cópia de chaves', 'Troca de fechaduras', 'Chave automotiva', 'Abertura de cofres'] },
+        'Eletricista Residencial': { icone: '⚡', desc: 'Reparos, chuveiros e fiação', sub: ['Instalação de chuveiro', 'Reparo de fiação', 'Troca de tomadas', 'Instalação de luminárias', 'Curto-circuito'] },
+        'Encanador': { icone: '🚰', desc: 'Vazamentos e desentupimentos', sub: ['Reparo de vazamentos', 'Desentupimento de pia', 'Desentupimento de vaso', 'Instalação hidráulica', 'Troca de torneiras'] },
+        'Ar-Condicionado': { icone: '❄️', desc: 'Instalação, limpeza e manutenção', sub: ['Instalação', 'Limpeza e manutenção', 'Recarga de gás', 'Reparo de defeitos', 'Remoção e reinstalação'] },
+        'Jardineiro': { icone: '', desc: 'Poda, limpeza de quintal e paisagismo', sub: ['Poda de árvores', 'Limpeza de quintal', 'Paisagismo', 'Corte de grama', 'Jardinagem geral'] },
+        'Eventos e Locação': { icone: '🎉', desc: 'Mesas, cadeiras, brinquedos e festas', sub: ['Aluguel de mesas e cadeiras', 'Brinquedos para festa', 'Decoração', 'Som e iluminação', 'Locação de equipamentos'] },
+        'Pedreiro': { icone: '🧱', desc: 'Reformas, pisos e revestimentos', sub: ['Reformas', 'Assentamento de pisos', 'Azulejos e revestimentos', 'Pequenas construções', 'Reparos em alvenaria'] },
+        'Gesseiro': { icone: '🏗️', desc: 'Forros, paredes 3D e molduras', sub: ['Forro de gesso', 'Paredes 3D', 'Molduras e sancas', 'Reparos em gesso', 'Divisórias'] },
+        'Pintor Residencial': { icone: '🖌️', desc: 'Pintura interna, externa e texturas', sub: ['Pintura interna', 'Pintura externa', 'Texturas e efeitos', 'Pintura de móveis', 'Preparação de superfícies'] },
+        'Dedetizador': { icone: '🪳', desc: 'Desinsetização e controle de pragas', sub: ['Dedetização residencial', 'Dedetização comercial', 'Controle de pragas', 'Desinsetização', 'Dedetização pós-obra'] },
+        'Marceneiro': { icone: '🪚', desc: 'Móveis e reparos em madeira', sub: ['Móveis sob medida', 'Cozinhas planejadas', 'Reparos em móveis', 'Portas e rodapés', 'Estantes e nichos'] },
+        'Serralheiro': { icone: '⛓️', desc: 'Estruturas metálicas e portões', sub: ['Portões e grades', 'Corrimãos', 'Estruturas metálicas', 'Soldas e reparos', 'Portas de ferro'] },
+        'Viagens': { icone: '', desc: 'Motorista particular e deslocamentos', sub: ['Motorista particular', 'Viagens intermunicipais', 'Leva e traz', 'Viagens longas', 'Passeios turísticos'] },
+        'Tosa Pet': { icone: '', desc: 'Cuidados com seu pet', sub: ['Tosa higiênica', 'Tosa completa', 'Banho', 'Táxi pet / Veterinário', 'Tosa na máquina'] },
+        'Beleza': { icone: '💇', desc: 'Serviços de beleza em casa', sub: ['Manicure / Pedicure', 'Cabelo (corte/escova)', 'Design de sobrancelha', 'Maquiagem', 'Depilação', 'Massagem relaxante'] },
+        'Vidraceiro': { icone: '🪟', desc: 'Vidros, espelhos e box', sub: ['Box de banheiro', 'Espelhos', 'Janelas e portas de vidro', 'Vidros temperados', 'Vidraçaria em geral'] },
+        'Técnico em Informática': { icone: '🖥️', desc: 'Reparos e suporte em computadores', sub: ['Formatação e Windows', 'Remoção de Vírus', 'Upgrade / Lentidão', 'Redes e Wi-Fi', 'Backup de Dados', 'Instalação de Programas'] },
+        'Personal Trainer': { icone: '💪', desc: 'Treinamento físico personalizado', sub: ['Musculação / Funcional', 'Pilates / Yoga', 'Treino para Gestantes', 'Treino para Idosos', 'Emagrecimento', 'Reabilitação / Fisioterapia'] }
     };
 
-    // ============================================
-    // ESTADO GLOBAL
-    // ============================================
     let categoriaSelecionada = '';
     let iconeSelecionado = '';
     let subcategoriaSelecionada = '';
@@ -371,9 +318,6 @@
     let localizacaoAtual = null;
     let veioDeSubcategoria = false;
 
-    // ============================================
-    // RENDERIZAÇÃO
-    // ============================================
     function renderizarCategorias() {
         const lista = document.getElementById('lista-categorias');
         lista.innerHTML = '';
@@ -419,9 +363,6 @@
         });
     }
 
-    // ============================================
-    // NAVEGAÇÃO
-    // ============================================
     function selecionarCategoria(nome, icone, elementoBtn) {
         categoriaSelecionada = nome;
         iconeSelecionado = icone;
@@ -506,12 +447,11 @@
         const btn = document.getElementById('btn-gps');
         const status = document.getElementById('location-status');
         
-        // Limpa estados anteriores
         btn.style.display = 'flex';
         btn.disabled = true;
         btn.innerHTML = '<span style="display:inline-block;animation:spin 1s linear infinite;">⏳</span> Buscando localização...';
         status.style.display = 'flex';
-        status.innerHTML = '<span style="color: var(--primary);">📡 Aguardando permissão...</span>';
+        status.innerHTML = '<span style="color: var(--primary);">📡 Aguardando permissão do navegador...</span>';
         document.getElementById('fallback-manual').style.display = 'none';
         document.getElementById('local-confirmado').style.display = 'none';
         localizacaoAtual = null;
@@ -523,26 +463,46 @@
 
         navigator.geolocation.getCurrentPosition(
             async (position) => {
-                // SUCESSO - GPS permitido!
                 const lat = position.coords.latitude;
                 const lon = position.coords.longitude;
                 
-                status.innerHTML = '<span style="color: var(--success);">✅ Localização obtida! Identificando bairro...</span>';
+                console.log('Coordenadas obtidas:', lat, lon);
+                status.innerHTML = '<span style="color: var(--primary);">🔄 Identificando o bairro...</span>';
                 
-                let nomeLocal = `Natal - RN`;
+                let nomeLocal = null;
+                
                 try {
-                    const response = await fetch(`https://nominatim.openstreetmap.org/reverse?format=json&lat=${lat}&lon=${lon}&zoom=16&addressdetails=1`);
+                    // Tenta pegar o nome do bairro via Nominatim (OpenStreetMap)
+                    const url = `https://nominatim.openstreetmap.org/reverse?format=jsonv2&lat=${lat}&lon=${lon}&zoom=18&addressdetails=1&accept-language=pt-BR`;
+                    const response = await fetch(url);
                     const data = await response.json();
-                    nomeLocal = data.address.neighbourhood || data.address.suburb || data.address.city_district || data.address.city || "Natal - RN";
+                    
+                    console.log('Resposta da API:', data);
+                    
+                    // Tenta várias formas de pegar o bairro (Nominatim usa nomes diferentes dependendo do país)
+                    const addr = data.address || {};
+                    nomeLocal = addr.neighbourhood || addr.suburb || addr.quarter || addr.city_district || addr.town || addr.city || addr.village;
+                    
+                    // Se pegou o nome, adiciona a cidade
+                    if (nomeLocal) {
+                        const cidade = addr.city || addr.town || addr.village || 'Natal';
+                        const estado = addr.state || 'RN';
+                        nomeLocal = `${nomeLocal}, ${cidade} - ${estado}`;
+                    }
                 } catch (e) {
-                    console.log("Erro ao buscar nome do bairro.");
+                    console.log("Erro ao buscar nome do bairro:", e);
+                }
+                
+                // Fallback: se não conseguiu pegar o nome, usa coordenadas
+                if (!nomeLocal) {
+                    nomeLocal = `Posição GPS (Lat: ${lat.toFixed(4)}, Lon: ${lon.toFixed(4)})`;
                 }
 
                 localizacaoAtual = { lat, lon, nome: nomeLocal, tipo: 'gps' };
                 exibirLocalConfirmada(nomeLocal);
             },
             (error) => {
-                // ERRO - Só mostra fallback se realmente der erro
+                console.log('Erro de geolocalização:', error);
                 let mensagem = 'Não foi possível obter sua localização.';
                 if (error.code === error.PERMISSION_DENIED) {
                     mensagem = 'Permissão de localização negada.';
@@ -563,7 +523,7 @@
         const fallback = document.getElementById('fallback-manual');
 
         btn.style.display = 'none';
-        status.innerHTML = `<span style="color: var(--action);">⚠️ ${mensagem}</span>`;
+        status.innerHTML = `<span style="color: var(--action);">️ ${mensagem}</span>`;
         fallback.style.display = 'block';
         document.getElementById('input-local').focus();
     }
@@ -583,22 +543,48 @@
     }
 
     function exibirLocalConfirmada(textoExibicao) {
-        document.getElementById('btn-gps').style.display = 'none';
-        document.getElementById('location-status').style.display = 'none';
-        document.getElementById('fallback-manual').style.display = 'none';
+        const btnGps = document.getElementById('btn-gps');
+        const status = document.getElementById('location-status');
+        const fallback = document.getElementById('fallback-manual');
+        const confirmado = document.getElementById('local-confirmado');
         
+        // Esconde tudo que não é a confirmação
+        btnGps.style.display = 'none';
+        status.style.display = 'none';
+        fallback.style.display = 'none';
+        
+        // Mostra a confirmação
         document.getElementById('texto-local-confirmado').innerText = textoExibicao;
-        document.getElementById('local-confirmado').style.display = 'flex';
+        confirmado.style.display = 'flex';
     }
 
     function resetarLocalizacao() {
+        console.log('Resetando localização...');
+        
+        // Limpa o estado
         localizacaoAtual = null;
-        solicitarLocalizacao();
+        
+        // Reset visual completo
+        const btnGps = document.getElementById('btn-gps');
+        const status = document.getElementById('location-status');
+        const fallback = document.getElementById('fallback-manual');
+        const confirmado = document.getElementById('local-confirmado');
+        
+        btnGps.style.display = 'flex';
+        btnGps.disabled = false;
+        btnGps.innerHTML = '📡 Usar minha localização atual';
+        
+        status.style.display = 'flex';
+        status.innerHTML = '';
+        
+        fallback.style.display = 'none';
+        confirmado.style.display = 'none';
+        document.getElementById('input-local').value = '';
+        
+        // Tenta GPS novamente
+        setTimeout(() => solicitarLocalizacao(), 300);
     }
 
-    // ============================================
-    // CONTADOR E BUSCA
-    // ============================================
     function mudarQuantidade(valor) {
         quantidadeAtual += valor;
         if (quantidadeAtual < 1) quantidadeAtual = 1;
@@ -628,7 +614,6 @@
         }, 4000);
     }
 
-    // Inicializa o app
     renderizarCategorias();
 </script>
 
