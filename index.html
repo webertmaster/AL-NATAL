@@ -2,73 +2,188 @@
 <html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
     <title>Alô Natal - App Cliente</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
     <style>
-        /* Reset e Base */
-        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
-        body { background-color: #f4f7f6; color: #333; display: flex; justify-content: center; }
+        :root {
+            --primary: #005b96;
+            --primary-dark: #003f6b;
+            --accent: #ffc107;
+            --action: #e65100;
+            --action-hover: #cf4800;
+            --success: #10b981;
+            --success-bg: #ecfdf5;
+            --bg-app: #f8fafc;
+            --bg-card: #ffffff;
+            --text-main: #0f172a;
+            --text-muted: #64748b;
+            --border: #e2e8f0;
+            --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+            --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+            --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Inter', system-ui, -apple-system, sans-serif; -webkit-tap-highlight-color: transparent; }
         
-        .app-container { width: 100%; max-width: 400px; background-color: #ffffff; min-height: 100vh; box-shadow: 0 0 20px rgba(0,0,0,0.1); position: relative; overflow-x: hidden; }
+        body { background-color: #e2e8f0; color: var(--text-main); display: flex; justify-content: center; min-height: 100dvh; }
         
-        /* Cabeçalho Home */
-        .header-home { background: linear-gradient(135deg, #005b96, #003f6b); color: white; padding: 30px 20px 20px; text-align: center; border-bottom-left-radius: 20px; border-bottom-right-radius: 20px; }
-        .header-home h1 { font-size: 24px; margin-bottom: 5px; color: #ffc107; }
-        .header-home p { font-size: 14px; font-weight: 300; }
+        .app-container { 
+            width: 100%; max-width: 480px; background-color: var(--bg-app); 
+            min-height: 100dvh; position: relative; overflow-x: hidden; 
+            display: flex; flex-direction: column;
+        }
         
-        /* Cabeçalho Pedido */
-        .header-pedido { background: linear-gradient(135deg, #005b96, #003f6b); color: white; padding: 20px; display: flex; align-items: center; border-bottom-left-radius: 20px; border-bottom-right-radius: 20px; }
-        .back-btn { background: none; border: none; color: white; font-size: 24px; cursor: pointer; margin-right: 15px; }
-        .header-pedido h1 { font-size: 20px; color: #ffc107; }
-        .header-pedido p { font-size: 13px; font-weight: 300; }
+        /* Cabeçalhos */
+        .header-home { 
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%); 
+            color: white; padding: 40px 24px 32px; text-align: center; 
+            border-bottom-left-radius: 24px; border-bottom-right-radius: 24px; 
+            box-shadow: var(--shadow-md);
+        }
+        .header-home h1 { font-size: 26px; font-weight: 700; margin-bottom: 6px; color: var(--accent); letter-spacing: -0.5px; }
+        .header-home p { font-size: 14px; font-weight: 400; opacity: 0.9; }
+        
+        .header-pedido, .header-sub { 
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%); 
+            color: white; padding: 20px 24px; display: flex; align-items: center; gap: 16px;
+            border-bottom-left-radius: 24px; border-bottom-right-radius: 24px;
+            box-shadow: var(--shadow-md);
+        }
+        .back-btn { 
+            background: rgba(255,255,255,0.15); border: none; color: white; 
+            width: 36px; height: 36px; border-radius: 50%; font-size: 18px; 
+            cursor: pointer; display: flex; align-items: center; justify-content: center;
+            transition: background 0.2s; flex-shrink: 0;
+        }
+        .back-btn:hover { background: rgba(255,255,255,0.25); }
+        .header-title h1 { font-size: 18px; font-weight: 600; color: white; }
+        .header-title p { font-size: 13px; opacity: 0.8; }
 
         /* Barra de Busca */
-        .search-bar { margin: -15px 20px 20px; background: white; border-radius: 25px; padding: 10px 15px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); display: flex; align-items: center; border: 1px solid #e0e0e0; }
-        .search-bar input { border: none; outline: none; width: 100%; font-size: 16px; margin-left: 10px; }
+        .search-bar { 
+            margin: -20px 24px 24px; background: var(--bg-card); border-radius: 16px; 
+            padding: 14px 18px; box-shadow: var(--shadow-lg); display: flex; align-items: center; 
+            border: 1px solid var(--border); transition: box-shadow 0.2s;
+        }
+        .search-bar:focus-within { box-shadow: 0 0 0 3px rgba(0, 91, 150, 0.15), var(--shadow-lg); border-color: var(--primary); }
+        .search-bar input { border: none; outline: none; width: 100%; font-size: 15px; margin-left: 12px; color: var(--text-main); background: transparent; }
         
-        .section-title { padding: 0 20px; font-size: 14px; color: #666; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 15px; font-weight: bold; }
+        .section-title { padding: 0 24px; font-size: 13px; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.8px; margin-bottom: 16px; font-weight: 600; }
         
         /* Lista de Categorias */
-        .category-list { padding: 0 20px; display: flex; flex-direction: column; gap: 12px; }
-        .category-btn { display: flex; align-items: center; background: white; border: 2px solid #eef2f5; border-radius: 15px; padding: 15px; cursor: pointer; transition: all 0.3s ease; text-align: left; }
-        .category-btn:hover { border-color: #005b96; background-color: #f8fbff; }
-        .category-icon { font-size: 24px; margin-right: 15px; width: 40px; text-align: center; }
-        .category-info h3 { font-size: 16px; color: #333; margin-bottom: 2px; }
-        .category-info p { font-size: 12px; color: #888; }
+        .category-list { padding: 0 24px 120px; display: flex; flex-direction: column; gap: 12px; }
+        .category-btn { 
+            display: flex; align-items: center; background: var(--bg-card); 
+            border: 1px solid var(--border); border-radius: 16px; padding: 16px; 
+            cursor: pointer; transition: all 0.2s ease; text-align: left; width: 100%;
+            box-shadow: var(--shadow-sm); position: relative;
+        }
+        .category-btn:hover { transform: translateY(-2px); box-shadow: var(--shadow-md); border-color: var(--primary); }
+        .category-btn.active { border-color: var(--primary); background-color: #f0f7ff; box-shadow: 0 0 0 2px rgba(0, 91, 150, 0.1); }
         
+        .category-icon { 
+            font-size: 22px; width: 44px; height: 44px; background: #f1f5f9; 
+            border-radius: 12px; display: flex; align-items: center; justify-content: center; 
+            margin-right: 16px; flex-shrink: 0;
+        }
+        .category-btn.active .category-icon { background: #dbeafe; }
+        .category-info { flex: 1; }
+        .category-info h3 { font-size: 15px; font-weight: 600; color: var(--text-main); margin-bottom: 4px; }
+        .category-info p { font-size: 13px; color: var(--text-muted); line-height: 1.3; }
+        .category-arrow { color: var(--text-muted); font-size: 20px; margin-left: 8px; }
+        .category-btn.has-sub .category-arrow::after { content: '›'; font-size: 28px; font-weight: 300; }
+        .category-btn:not(.has-sub) .category-arrow::after { content: '✓'; font-size: 18px; color: var(--success); font-weight: 600; }
+
         /* Formulário de Pedido */
-        .form-section { padding: 25px 20px; }
-        .form-group { margin-bottom: 20px; }
-        .form-label { font-size: 14px; font-weight: bold; color: #005b96; margin-bottom: 8px; display: block; text-transform: uppercase; }
-        .custom-select { width: 100%; padding: 15px; border: 2px solid #eef2f5; border-radius: 12px; font-size: 16px; color: #333; background-color: #f8fbff; outline: none; }
+        .form-section { padding: 24px; flex: 1; padding-bottom: 120px; }
+        .form-group { margin-bottom: 24px; }
+        .form-label { font-size: 13px; font-weight: 600; color: var(--primary); margin-bottom: 8px; display: block; text-transform: uppercase; letter-spacing: 0.5px; }
+        
+        .custom-select, .custom-textarea, .custom-input { 
+            width: 100%; padding: 14px 16px; border: 1px solid var(--border); 
+            border-radius: 12px; font-size: 15px; color: var(--text-main); 
+            background-color: var(--bg-card); outline: none; transition: all 0.2s;
+            appearance: none; -webkit-appearance: none;
+        }
+        .custom-select { background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='%2364748b'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M19 9l-7 7-7-7'%3E%3C/path%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 16px center; background-size: 20px; }
+        .custom-select:focus, .custom-textarea:focus, .custom-input:focus { border-color: var(--primary); box-shadow: 0 0 0 3px rgba(0, 91, 150, 0.1); }
+        .custom-textarea { resize: none; height: 100px; }
         
         /* Contador */
-        .counter-container { display: flex; align-items: center; background: #f8fbff; border: 2px solid #eef2f5; border-radius: 12px; overflow: hidden; width: 150px; }
-        .counter-btn { flex: 1; background: none; border: none; padding: 12px; font-size: 20px; color: #005b96; cursor: pointer; font-weight: bold; }
-        .counter-display { flex: 1; text-align: center; font-size: 18px; font-weight: bold; border-left: 2px solid #eef2f5; border-right: 2px solid #eef2f5; padding: 10px 0; }
+        .counter-container { display: flex; align-items: center; background: var(--bg-card); border: 1px solid var(--border); border-radius: 12px; overflow: hidden; width: 140px; box-shadow: var(--shadow-sm); }
+        .counter-btn { flex: 1; background: none; border: none; padding: 14px; font-size: 20px; color: var(--primary); cursor: pointer; font-weight: 600; transition: background 0.2s; }
+        .counter-btn:hover { background: #f1f5f9; }
+        .counter-btn:active { background: #e2e8f0; }
+        .counter-display { flex: 1; text-align: center; font-size: 16px; font-weight: 600; border-left: 1px solid var(--border); border-right: 1px solid var(--border); padding: 14px 0; color: var(--text-main); }
         
-        /* Textarea */
-        .custom-textarea { width: 100%; padding: 15px; border: 2px solid #eef2f5; border-radius: 12px; font-size: 14px; color: #333; background-color: #f8fbff; outline: none; resize: none; height: 100px; }
+        /* Botões */
+        .footer-btn-container { position: fixed; bottom: 0; width: 100%; max-width: 480px; padding: 20px 24px 32px; background: rgba(255,255,255,0.95); backdrop-filter: blur(8px); border-top: 1px solid var(--border); z-index: 50; }
+        .btn-primary { 
+            width: 100%; background-color: var(--action); color: white; border: none; 
+            padding: 16px; border-radius: 14px; font-size: 16px; font-weight: 600; 
+            cursor: pointer; text-transform: uppercase; letter-spacing: 0.5px;
+            box-shadow: 0 4px 12px rgba(230, 81, 0, 0.3); transition: all 0.2s;
+        }
+        .btn-primary:hover:not(:disabled) { background-color: var(--action-hover); transform: translateY(-1px); }
+        .btn-primary:active:not(:disabled) { transform: translateY(1px); }
+        .btn-primary:disabled { background-color: #cbd5e1; color: #94a3b8; cursor: not-allowed; box-shadow: none; }
         
-        /* Rodapé Fixado */
-        .footer-btn-container { position: fixed; bottom: 0; width: 100%; max-width: 400px; padding: 20px; background: white; box-shadow: 0 -2px 10px rgba(0,0,0,0.05); z-index: 10; }
-        .btn-primary { width: 100%; background-color: #e65100; color: white; border: none; padding: 15px; border-radius: 25px; font-size: 16px; font-weight: bold; cursor: pointer; text-transform: uppercase; }
-        
-        .spacer { height: 110px; }
+        .btn-secondary { 
+            width: 100%; background-color: var(--primary); color: white; border: none; 
+            padding: 14px; border-radius: 12px; font-size: 15px; font-weight: 600; 
+            cursor: pointer; transition: all 0.2s; display: flex; align-items: center; justify-content: center; gap: 8px;
+        }
+        .btn-secondary:hover:not(:disabled) { background-color: var(--primary-dark); }
+        .btn-secondary:disabled { background-color: #cbd5e1; color: #94a3b8; cursor: not-allowed; }
+
+        /* Fallback de Localização */
+        .location-status { font-size: 13px; color: var(--text-muted); margin: 8px 0 12px; min-height: 20px; display: flex; align-items: center; gap: 6px; }
+        .fallback-manual { animation: slideDown 0.3s ease-out; }
+        .location-confirmed { 
+            background: var(--success-bg); color: #065f46; padding: 14px 16px; 
+            border-radius: 12px; font-size: 14px; font-weight: 500; 
+            border: 1px solid #a7f3d0; display: flex; justify-content: space-between; align-items: center; gap: 12px;
+        }
+        .btn-alterar { background: none; border: none; color: #047857; text-decoration: underline; cursor: pointer; font-size: 13px; font-weight: 600; white-space: nowrap; }
+
+        @keyframes slideDown {
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
 
         /* Tela de Radar */
-        .radar-screen { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 43, 73, 0.95); display: none; flex-direction: column; justify-content: center; align-items: center; color: white; z-index: 999; text-align: center; padding: 20px; }
-        .radar { width: 100px; height: 100px; background: rgba(255, 193, 7, 0.2); border-radius: 50%; border: 2px solid #ffc107; display: flex; justify-content: center; align-items: center; position: relative; animation: pulse 1.5s infinite; margin-bottom: 20px; }
-        .radar-icon { font-size: 40px; }
-        @keyframes pulse {
-            0% { transform: scale(0.9); box-shadow: 0 0 0 0 rgba(255, 193, 7, 0.7); }
-            70% { transform: scale(1.1); box-shadow: 0 0 0 20px rgba(255, 193, 7, 0); }
-            100% { transform: scale(0.9); box-shadow: 0 0 0 0 rgba(255, 193, 7, 0); }
+        .radar-screen { 
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%; 
+            background: rgba(15, 23, 42, 0.85); backdrop-filter: blur(6px);
+            display: none; flex-direction: column; justify-content: center; align-items: center; 
+            color: white; z-index: 999; text-align: center; padding: 24px; 
         }
+        .radar { 
+            width: 110px; height: 110px; background: rgba(255, 193, 7, 0.15); 
+            border-radius: 50%; border: 2px solid var(--accent); 
+            display: flex; justify-content: center; align-items: center; position: relative; 
+            animation: pulse 2s infinite ease-out; margin-bottom: 28px; 
+        }
+        .radar-icon { font-size: 48px; filter: drop-shadow(0 4px 6px rgba(0,0,0,0.3)); }
+        
+        @keyframes pulse {
+            0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(255, 193, 7, 0.6); }
+            70% { transform: scale(1.05); box-shadow: 0 0 0 30px rgba(255, 193, 7, 0); }
+            100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(255, 193, 7, 0); }
+        }
+        .radar-screen h2 { font-size: 22px; font-weight: 600; margin-bottom: 8px; }
+        .radar-screen p { font-size: 15px; opacity: 0.8; max-width: 280px; line-height: 1.4; }
+
+        @keyframes spin { 100% { transform: rotate(360deg); } }
     </style>
 </head>
 <body>
 
+<!-- TELA 1: CATEGORIAS -->
 <div class="app-container" id="tela-categorias">
     <div class="header-home">
         <h1>☀️ Alô Natal</h1>
@@ -76,129 +191,42 @@
     </div>
 
     <div class="search-bar">
-        🔍 <input type="text" placeholder="Buscar serviços em Natal...">
+        <span>🔍</span>
+        <input type="text" id="input-busca" placeholder="Buscar serviços em Natal..." oninput="filtrarCategorias()">
     </div>
 
     <h2 class="section-title">Escolha a Categoria:</h2>
 
-    <div class="category-list">
-        
-        <button class="category-btn" onclick="selecionarCategoria('Servente / Ajudante', '🪵')">
-            <span class="category-icon">🪵</span>
-            <div class="category-info">
-                <h3>Servente / Ajudante</h3>
-                <p>Limpeza de entulho, diárias e cargas</p>
-            </div>
-        </button>
-
-        <button class="category-btn" onclick="selecionarCategoria('Diarista / Faxineira', '🧹')">
-            <span class="category-icon">🧹</span>
-            <div class="category-info">
-                <h3>Diarista / Faxineira</h3>
-                <p>Limpeza comum, pesada ou pós-obra</p>
-            </div>
-        </button>
-
-        <button class="category-btn" onclick="selecionarCategoria('Assistencia Domiciliar', '🛠️')">
-            <span class="category-icon">🛠️</span>
-            <div class="category-info">
-                <h3>Assistencia Domiciliar</h3>
-                <p>Pequenos reparos e instalações</p>
-            </div>
-        </button>
-
-        <button class="category-btn" onclick="selecionarCategoria('Montador de Móveis', '🪑')">
-            <span class="category-icon">🪑</span>
-            <div class="category-info">
-                <h3>Montador de Móveis</h3>
-                <p>Montagem e desmontagem em geral</p>
-            </div>
-        </button>
-
-        <button class="category-btn" onclick="selecionarCategoria('Chaveiro', '🔑')">
-            <span class="category-icon">🔑</span>
-            <div class="category-info">
-                <h3>Chaveiro</h3>
-                <p>Abertura de portas, cópias e fechaduras</p>
-            </div>
-        </button>
-
-        <button class="category-btn" onclick="selecionarCategoria('Eletricista Residencial', '⚡')">
-            <span class="category-icon">⚡</span>
-            <div class="category-info">
-                <h3>Eletricista Residencial</h3>
-                <p>Reparos, chuveiros e fiação</p>
-            </div>
-        </button>
-
-        <button class="category-btn" onclick="selecionarCategoria('Encanador', '🚰')">
-            <span class="category-icon">🚰</span>
-            <div class="category-info">
-                <h3>Encanador</h3>
-                <p>Vazamentos e desentupimentos</p>
-            </div>
-        </button>
-
-        <button class="category-btn" onclick="selecionarCategoria('Ar-Condicionado', '❄️')">
-            <span class="category-icon">❄️</span>
-            <div class="category-info">
-                <h3>Ar-Condicionado</h3>
-                <p>Instalação, limpeza e manutenção</p>
-            </div>
-        </button>
-
-        <button class="category-btn" onclick="selecionarCategoria('Jardineiro', '🌱')">
-            <span class="category-icon">🌱</span>
-            <div class="category-info">
-                <h3>Jardineiro</h3>
-                <p>Poda, limpeza de quintal e paisagismo</p>
-            </div>
-        </button>
-
-        <button class="category-btn" onclick="selecionarCategoria('Eventos e Locação', '🎉')">
-            <span class="category-icon">🎉</span>
-            <div class="category-info">
-                <h3>Eventos e Locação</h3>
-                <p>Mesas, cadeiras, brinquedos e festas</p>
-            </div>
-        </button>
-
-        <button class="category-btn" onclick="selecionarCategoria('Pedreiro', '🧱')">
-            <span class="category-icon">🧱</span>
-            <div class="category-info">
-                <h3>Pedreiro</h3>
-                <p>Reformas, pisos e revestimentos</p>
-            </div>
-        </button>
-        
-        <button class="category-btn" onclick="selecionarCategoria('Gesseiro', '🏗️')">
-            <span class="category-icon">🏗️</span>
-            <div class="category-info">
-                <h3>Gesseiro</h3>
-                <p>Forros, paredes 3D e molduras</p>
-            </div>
-        </button>
-
-        <button class="category-btn" onclick="selecionarCategoria('Pintor Residencial', '🖌️')">
-            <span class="category-icon">🖌️</span>
-            <div class="category-info">
-                <h3>Pintor Residencial</h3>
-                <p>Pintura interna, externa e texturas</p>
-            </div>
-        </button>
-
+    <div class="category-list" id="lista-categorias">
+        <!-- Preenchida via JavaScript -->
     </div>
 
-    <div class="spacer"></div>
-
     <div class="footer-btn-container">
-        <button class="btn-primary" id="btn-proximo" style="opacity: 0.5; pointer-events: none;" onclick="avancarParaPedido()">Próximo Passo</button>
+        <button class="btn-primary" id="btn-proximo" disabled onclick="avancarParaPedido()">Próximo Passo</button>
     </div>
 </div>
 
+<!-- TELA 2: SUBCATEGORIAS -->
+<div class="app-container" id="tela-subcategorias" style="display: none;">
+    <div class="header-sub">
+        <button class="back-btn" onclick="voltarParaCategorias()">←</button>
+        <div class="header-title">
+            <h1 id="titulo-subcategoria">Serviço</h1>
+            <p>Escolha o tipo específico</p>
+        </div>
+    </div>
+
+    <div class="form-section" style="padding-bottom: 40px;">
+        <div class="category-list" id="lista-subcategorias" style="padding: 0;">
+            <!-- Preenchida via JavaScript -->
+        </div>
+    </div>
+</div>
+
+<!-- TELA 3: PEDIDO -->
 <div class="app-container" id="tela-pedido" style="display: none;">
     <div class="header-pedido">
-        <button class="back-btn" onclick="voltarParaCategorias()">←</button>
+        <button class="back-btn" onclick="voltarDaTelaPedido()">←</button>
         <div class="header-title">
             <h1 id="titulo-pedido">Serviço</h1>
             <p>Detalhes do pedido</p>
@@ -206,6 +234,26 @@
     </div>
 
     <div class="form-section">
+        <!-- Localização com Fallback -->
+        <div class="form-group" id="location-group">
+            <label class="form-label">📍 Localização do Serviço</label>
+            <button id="btn-gps" class="btn-secondary" onclick="solicitarLocalizacao()">
+                📡 Usar minha localização atual
+            </button>
+            <p id="location-status" class="location-status"></p>
+            
+            <div id="fallback-manual" class="fallback-manual" style="display: none;">
+                <p style="font-size: 13px; color: var(--action); margin-bottom: 10px; font-weight: 600;">⚠️ Não foi possível acessar o GPS. Sem problemas!</p>
+                <input type="text" id="input-local" class="custom-input" placeholder="Ex: Lagoa Nova, Natal-RN" style="margin-bottom: 12px;">
+                <button class="btn-secondary" style="background-color: var(--success);" onclick="confirmarLocalizacaoManual()">Confirmar Bairro/CEP</button>
+            </div>
+
+            <div id="local-confirmado" class="location-confirmed" style="display: none;">
+                <span>✅ <strong id="texto-local-confirmado"></strong></span>
+                <button class="btn-alterar" onclick="resetarLocalizacao()">Alterar</button>
+            </div>
+        </div>
+
         <div class="form-group">
             <label class="form-label">1. O que você precisa?</label>
             <select class="custom-select" id="subcategoria">
@@ -218,16 +266,18 @@
         <div class="form-group">
             <label class="form-label">2. Quantidade (Unidades/Cômodos)?</label>
             <div class="counter-container">
-                <button class="counter-btn" onclick="mudarQuantidade(-1)">-</button>
+                <button class="counter-btn" onclick="mudarQuantidade(-1)">−</button>
                 <div class="counter-display" id="quantidade">1</div>
                 <button class="counter-btn" onclick="mudarQuantidade(1)">+</button>
             </div>
-            <p style="font-size: 12px; color: #888; margin-top: 5px;">*Isso ajuda a calcular o custo em créditos.</p>
+            <p style="font-size: 12px; color: var(--text-muted); margin-top: 8px; display: flex; align-items: center; gap: 4px;">
+                <span>💡</span> Isso ajuda a calcular o custo em créditos.
+            </p>
         </div>
 
         <div class="form-group">
             <label class="form-label">3. Observações (Opcional)</label>
-            <textarea class="custom-textarea" placeholder="Descreva detalhes adicionais sobre o serviço..."></textarea>
+            <textarea class="custom-textarea" placeholder="Descreva detalhes adicionais sobre o serviço, como ponto de referência ou materiais necessários..."></textarea>
         </div>
     </div>
 
@@ -238,65 +288,317 @@
     </div>
 </div>
 
+<!-- TELA 4: RADAR -->
 <div class="radar-screen" id="telaRadar">
     <div class="radar">
         <span class="radar-icon">📍</span>
     </div>
     <h2>Buscando Parceiros...</h2>
-    <p>Buscando profissionais na sua região usando o GPS.</p>
+    <p id="radar-texto">Localizando profissionais qualificados na sua região.</p>
 </div>
 
 <script>
+    // ============================================
+    // BANCO DE DADOS DE CATEGORIAS
+    // ============================================
+    const CATEGORIAS = {
+        // ===== CATEGORIAS SIMPLES (sem sub) =====
+        'Servente / Ajudante': { icone: '🪵', desc: 'Limpeza de entulho, diárias e cargas', sub: null },
+        'Diarista / Faxineira': { icone: '🧹', desc: 'Limpeza comum, pesada ou pós-obra', sub: null },
+        'Assistência Domiciliar': { icone: '🛠️', desc: 'Pequenos reparos e instalações', sub: null },
+        'Montador de Móveis': { icone: '🪑', desc: 'Montagem e desmontagem em geral', sub: null },
+        'Chaveiro': { icone: '🔑', desc: 'Abertura de portas, cópias e fechaduras', sub: null },
+        'Eletricista Residencial': { icone: '⚡', desc: 'Reparos, chuveiros e fiação', sub: null },
+        'Encanador': { icone: '🚰', desc: 'Vazamentos e desentupimentos', sub: null },
+        'Ar-Condicionado': { icone: '❄️', desc: 'Instalação, limpeza e manutenção', sub: null },
+        'Jardineiro': { icone: '🌱', desc: 'Poda, limpeza de quintal e paisagismo', sub: null },
+        'Eventos e Locação': { icone: '🎉', desc: 'Mesas, cadeiras, brinquedos e festas', sub: null },
+        'Pedreiro': { icone: '🧱', desc: 'Reformas, pisos e revestimentos', sub: null },
+        'Gesseiro': { icone: '🏗️', desc: 'Forros, paredes 3D e molduras', sub: null },
+        'Pintor Residencial': { icone: '🖌️', desc: 'Pintura interna, externa e texturas', sub: null },
+        'Dedetizador': { icone: '🪳', desc: 'Desinsetização e controle de pragas', sub: null },
+
+        // ===== CATEGORIAS COM SUBCATEGORIAS =====
+        'Marceneiro': { 
+            icone: '🪚', 
+            desc: 'Móveis e reparos em madeira', 
+            sub: ['Móveis sob medida', 'Cozinhas planejadas', 'Reparos em móveis', 'Portas e rodapés']
+        },
+        'Serralheiro': {
+            icone: '⛓️',
+            desc: 'Estruturas metálicas e portões',
+            sub: ['Portões e grades', 'Corrimãos', 'Estruturas metálicas', 'Soldas e reparos']
+        },
+        'Viagens': {
+            icone: '🚗',
+            desc: 'Motorista particular e deslocamentos',
+            sub: ['Motorista particular', 'Viagens intermunicipais', 'Leva e traz', 'Viagens longas']
+        },
+        'Tosa Pet': {
+            icone: '🐕',
+            desc: 'Cuidados com seu pet',
+            sub: ['Tosa higiênica', 'Tosa completa', 'Banho', 'Táxi pet / Veterinário']
+        },
+        'Beleza': {
+            icone: '💇',
+            desc: 'Serviços de beleza em casa',
+            sub: ['Manicure / Pedicure', 'Cabelo (corte/escova)', 'Design de sobrancelha', 'Maquiagem', 'Depilação', 'Massagem relaxante']
+        },
+        'Vidraceiro': {
+            icone: '🪟',
+            desc: 'Vidros, espelhos e box',
+            sub: ['Box de banheiro', 'Espelhos', 'Janelas e portas de vidro', 'Vidros temperados']
+        },
+        'Técnico em Informática': {
+            icone: '🖥️',
+            desc: 'Reparos e suporte em computadores',
+            sub: ['Formatação e Windows', 'Remoção de Vírus', 'Upgrade / Lentidão', 'Redes e Wi-Fi', 'Backup de Dados', 'Instalação de Programas']
+        },
+        'Personal Trainer': {
+            icone: '💪',
+            desc: 'Treinamento físico personalizado',
+            sub: ['Musculação / Funcional', 'Pilates / Yoga', 'Treino para Gestantes', 'Treino para Idosos', 'Emagrecimento', 'Reabilitação / Fisioterapia']
+        }
+    };
+
+    // ============================================
+    // ESTADO GLOBAL
+    // ============================================
     let categoriaSelecionada = '';
     let iconeSelecionado = '';
+    let subcategoriaSelecionada = '';
     let quantidadeAtual = 1;
+    let localizacaoAtual = null;
+    let veioDeSubcategoria = false;
 
-    // Ação 1: Selecionar Categoria
-    function selecionarCategoria(nome, icone) {
-        categoriaSelecionada = nome;
-        iconeSelecionado = icone;
+    // ============================================
+    // RENDERIZAÇÃO
+    // ============================================
+    function renderizarCategorias() {
+        const lista = document.getElementById('lista-categorias');
+        lista.innerHTML = '';
         
-        const botoes = document.querySelectorAll('#tela-categorias .category-btn');
-        botoes.forEach(btn => {
-            btn.style.borderColor = '#eef2f5';
-            btn.style.backgroundColor = 'white';
+        Object.keys(CATEGORIAS).forEach(nome => {
+            const cat = CATEGORIAS[nome];
+            const temSub = cat.sub && cat.sub.length > 0;
+            
+            const btn = document.createElement('button');
+            btn.className = 'category-btn' + (temSub ? ' has-sub' : '');
+            btn.setAttribute('data-nome', nome.toLowerCase());
+            btn.innerHTML = `
+                <span class="category-icon">${cat.icone}</span>
+                <div class="category-info">
+                    <h3>${nome}</h3>
+                    <p>${cat.desc}</p>
+                </div>
+                <span class="category-arrow"></span>
+            `;
+            btn.onclick = () => selecionarCategoria(nome, cat.icone, btn);
+            lista.appendChild(btn);
         });
-
-        event.currentTarget.style.borderColor = '#005b96';
-        event.currentTarget.style.backgroundColor = '#f8fbff';
-
-        const btnProximo = document.getElementById('btn-proximo');
-        btnProximo.style.opacity = '1';
-        btnProximo.style.pointerEvents = 'auto';
-        btnProximo.innerText = `Continuar com ${nome}`;
     }
 
-    // Ação 2: Clicar em Continuar e pedir GPS
+    function renderizarSubcategorias(nomeCategoria) {
+        const lista = document.getElementById('lista-subcategorias');
+        lista.innerHTML = '';
+        
+        const cat = CATEGORIAS[nomeCategoria];
+        cat.sub.forEach(sub => {
+            const btn = document.createElement('button');
+            btn.className = 'category-btn';
+            btn.innerHTML = `
+                <span class="category-icon">${cat.icone}</span>
+                <div class="category-info">
+                    <h3>${sub}</h3>
+                    <p>${nomeCategoria}</p>
+                </div>
+                <span class="category-arrow"></span>
+            `;
+            btn.onclick = () => selecionarSubcategoria(sub);
+            lista.appendChild(btn);
+        });
+    }
+
+    // ============================================
+    // NAVEGAÇÃO
+    // ============================================
+    function selecionarCategoria(nome, icone, elementoBtn) {
+        categoriaSelecionada = nome;
+        iconeSelecionado = icone;
+        subcategoriaSelecionada = '';
+        
+        document.querySelectorAll('#lista-categorias .category-btn').forEach(btn => btn.classList.remove('active'));
+        elementoBtn.classList.add('active');
+        
+        const btnProximo = document.getElementById('btn-proximo');
+        btnProximo.disabled = false;
+        
+        const cat = CATEGORIAS[nome];
+        const temSub = cat.sub && cat.sub.length > 0;
+        btnProximo.innerText = temSub ? `Escolher tipo de ${nome}` : `Continuar com ${nome}`;
+    }
+
     function avancarParaPedido() {
-        if (navigator.geolocation) {
-            navigator.geolocation.getCurrentPosition(function(posicao) {
-                // GPS Liberado! Oculta Tela 1, Mostra Tela 2
-                document.getElementById('tela-categorias').style.display = 'none';
-                document.getElementById('tela-pedido').style.display = 'block';
-                
-                // Atualiza o Título da Tela 2
-                document.getElementById('titulo-pedido').innerText = `${iconeSelecionado} ${categoriaSelecionada}`;
-                
-            }, function(erro) {
-                alert("Para encontrar o profissional ideal perto de você, por favor, permita o acesso ao GPS!");
-            });
+        if (!categoriaSelecionada) return;
+        
+        const cat = CATEGORIAS[categoriaSelecionada];
+        const temSub = cat.sub && cat.sub.length > 0;
+        
+        if (temSub) {
+            document.getElementById('titulo-subcategoria').innerText = `${iconeSelecionado} ${categoriaSelecionada}`;
+            renderizarSubcategorias(categoriaSelecionada);
+            
+            document.getElementById('tela-categorias').style.display = 'none';
+            document.getElementById('tela-subcategorias').style.display = 'flex';
         } else {
-            alert("O GPS não é suportado pelo seu navegador.");
+            abrirTelaPedido();
         }
     }
 
-    // Ação 3: Botão Voltar
-    function voltarParaCategorias() {
-        document.getElementById('tela-pedido').style.display = 'none';
-        document.getElementById('tela-categorias').style.display = 'block';
+    function selecionarSubcategoria(sub) {
+        subcategoriaSelecionada = sub;
+        veioDeSubcategoria = true;
+        abrirTelaPedido();
     }
 
-    // Ação 4: Contador de Quantidade
+    function abrirTelaPedido() {
+        document.getElementById('tela-categorias').style.display = 'none';
+        document.getElementById('tela-subcategorias').style.display = 'none';
+        document.getElementById('tela-pedido').style.display = 'flex';
+        
+        const tituloFinal = subcategoriaSelecionada 
+            ? `${iconeSelecionado} ${subcategoriaSelecionada}` 
+            : `${iconeSelecionado} ${categoriaSelecionada}`;
+        document.getElementById('titulo-pedido').innerText = tituloFinal;
+        
+        solicitarLocalizacao();
+    }
+
+    function filtrarCategorias() {
+        const termo = document.getElementById('input-busca').value.toLowerCase();
+        document.querySelectorAll('#lista-categorias .category-btn').forEach(btn => {
+            const nome = btn.getAttribute('data-nome');
+            btn.style.display = nome.includes(termo) ? 'flex' : 'none';
+        });
+    }
+
+    function voltarParaCategorias() {
+        document.getElementById('tela-subcategorias').style.display = 'none';
+        document.getElementById('tela-categorias').style.display = 'flex';
+    }
+
+    function voltarDaTelaPedido() {
+        document.getElementById('tela-pedido').style.display = 'none';
+        
+        if (veioDeSubcategoria) {
+            document.getElementById('titulo-subcategoria').innerText = `${iconeSelecionado} ${categoriaSelecionada}`;
+            renderizarSubcategorias(categoriaSelecionada);
+            document.getElementById('tela-subcategorias').style.display = 'flex';
+        } else {
+            document.getElementById('tela-categorias').style.display = 'flex';
+        }
+    }
+
+    // ============================================
+    // LOCALIZAÇÃO - CORRIGIDA
+    // ============================================
+    function solicitarLocalizacao() {
+        const btn = document.getElementById('btn-gps');
+        const status = document.getElementById('location-status');
+        
+        // Limpa estados anteriores
+        btn.style.display = 'flex';
+        btn.disabled = true;
+        btn.innerHTML = '<span style="display:inline-block;animation:spin 1s linear infinite;">⏳</span> Buscando localização...';
+        status.style.display = 'flex';
+        status.innerHTML = '<span style="color: var(--primary);">📡 Aguardando permissão...</span>';
+        document.getElementById('fallback-manual').style.display = 'none';
+        document.getElementById('local-confirmado').style.display = 'none';
+        localizacaoAtual = null;
+
+        if (!navigator.geolocation) {
+            tratarErroGeolocalizacao('Seu navegador não suporta geolocalização.');
+            return;
+        }
+
+        navigator.geolocation.getCurrentPosition(
+            async (position) => {
+                // SUCESSO - GPS permitido!
+                const lat = position.coords.latitude;
+                const lon = position.coords.longitude;
+                
+                status.innerHTML = '<span style="color: var(--success);">✅ Localização obtida! Identificando bairro...</span>';
+                
+                let nomeLocal = `Natal - RN`;
+                try {
+                    const response = await fetch(`https://nominatim.openstreetmap.org/reverse?format=json&lat=${lat}&lon=${lon}&zoom=16&addressdetails=1`);
+                    const data = await response.json();
+                    nomeLocal = data.address.neighbourhood || data.address.suburb || data.address.city_district || data.address.city || "Natal - RN";
+                } catch (e) {
+                    console.log("Erro ao buscar nome do bairro.");
+                }
+
+                localizacaoAtual = { lat, lon, nome: nomeLocal, tipo: 'gps' };
+                exibirLocalConfirmada(nomeLocal);
+            },
+            (error) => {
+                // ERRO - Só mostra fallback se realmente der erro
+                let mensagem = 'Não foi possível obter sua localização.';
+                if (error.code === error.PERMISSION_DENIED) {
+                    mensagem = 'Permissão de localização negada.';
+                } else if (error.code === error.POSITION_UNAVAILABLE) {
+                    mensagem = 'Sinal de GPS indisponível.';
+                } else if (error.code === error.TIMEOUT) {
+                    mensagem = 'A solicitação expirou.';
+                }
+                tratarErroGeolocalizacao(mensagem);
+            },
+            { timeout: 15000, enableHighAccuracy: true, maximumAge: 0 }
+        );
+    }
+
+    function tratarErroGeolocalizacao(mensagem) {
+        const btn = document.getElementById('btn-gps');
+        const status = document.getElementById('location-status');
+        const fallback = document.getElementById('fallback-manual');
+
+        btn.style.display = 'none';
+        status.innerHTML = `<span style="color: var(--action);">⚠️ ${mensagem}</span>`;
+        fallback.style.display = 'block';
+        document.getElementById('input-local').focus();
+    }
+
+    function confirmarLocalizacaoManual() {
+        const input = document.getElementById('input-local');
+        const valor = input.value.trim();
+
+        if (valor.length < 3) {
+            alert('Por favor, digite um bairro ou CEP válido.');
+            return;
+        }
+
+        const nomeFinal = valor.toLowerCase().includes('natal') ? valor : valor + ", Natal - RN";
+        localizacaoAtual = { nome: nomeFinal, tipo: 'manual' };
+        exibirLocalConfirmada(nomeFinal);
+    }
+
+    function exibirLocalConfirmada(textoExibicao) {
+        document.getElementById('btn-gps').style.display = 'none';
+        document.getElementById('location-status').style.display = 'none';
+        document.getElementById('fallback-manual').style.display = 'none';
+        
+        document.getElementById('texto-local-confirmado').innerText = textoExibicao;
+        document.getElementById('local-confirmado').style.display = 'flex';
+    }
+
+    function resetarLocalizacao() {
+        localizacaoAtual = null;
+        solicitarLocalizacao();
+    }
+
+    // ============================================
+    // CONTADOR E BUSCA
+    // ============================================
     function mudarQuantidade(valor) {
         quantidadeAtual += valor;
         if (quantidadeAtual < 1) quantidadeAtual = 1;
@@ -304,17 +606,32 @@
         document.getElementById('quantidade').innerText = quantidadeAtual;
     }
 
-    // Ação 5: Botão Final (Buscar Radar)
     function buscarProfissionais() {
+        if (!localizacaoAtual) {
+            alert('⚠️ Por favor, informe sua localização antes de buscar.');
+            document.getElementById('location-group').scrollIntoView({ behavior: 'smooth', block: 'center' });
+            return;
+        }
+
         const telaRadar = document.getElementById('telaRadar');
+        const localTexto = localizacaoAtual.tipo === 'gps' ? 'via GPS' : 'no bairro ' + localizacaoAtual.nome;
+        
+        document.getElementById('radar-texto').innerText = `Buscando profissionais de ${categoriaSelecionada} ${localTexto}...`;
         telaRadar.style.display = 'flex';
         
         setTimeout(() => {
             telaRadar.style.display = 'none';
-            alert('🎉 Profissionais localizados na sua região! O chat será aberto.');
+            const info = subcategoriaSelecionada 
+                ? `${subcategoriaSelecionada} (${categoriaSelecionada})`
+                : categoriaSelecionada;
+            alert(`🎉 Profissionais localizados!\n\n📍 ${localizacaoAtual.nome}\n🔧 ${info}\n\n(Em breve, o chat será aberto).`);
         }, 4000);
     }
+
+    // Inicializa o app
+    renderizarCategorias();
 </script>
 
 </body>
 </html>
+
