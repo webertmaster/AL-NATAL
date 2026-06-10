@@ -4,215 +4,68 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
     <title>Alô Natal - App Cliente</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
         :root {
-            --primary: #1a1a2e;
-            --primary-dark: #0f0c29;
-            --accent: #ffd700;
-            --accent-dark: #ffc107;
-            --action: #e65100;
-            --action-hover: #ff6d00;
-            --success: #10b981;
-            --bg-app: #f8fafc;
-            --bg-card: #ffffff;
-            --text-main: #1e293b;
-            --text-muted: #64748b;
-            --border: #e2e8f0;
-            --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
-            --shadow-md: 0 8px 25px rgb(0 0 0 / 0.08);
-            --shadow-lg: 0 20px 40px rgb(0 0 0 / 0.12);
-            --shadow-xl: 0 25px 50px rgb(0 0 0 / 0.15);
+            --primary: #1a1a2e; --primary-dark: #0f0c29; --accent: #ffd700; --accent-dark: #ffc107;
+            --action: #e65100; --action-hover: #ff6d00; --success: #10b981; --bg-app: #f8fafc;
+            --bg-card: #ffffff; --text-main: #1e293b; --text-muted: #64748b; --border: #e2e8f0;
         }
-
         * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Inter', system-ui, sans-serif; -webkit-tap-highlight-color: transparent; }
+        body { background: linear-gradient(135deg, #0f0c29, #302b63, #24243e); display: flex; justify-content: center; min-height: 100dvh; }
+        .app-container { width: 100%; max-width: 480px; background: var(--bg-app); min-height: 100dvh; position: relative; overflow-x: hidden; display: flex; flex-direction: column; box-shadow: 0 0 60px rgba(0,0,0,0.5); }
         
-        body { 
-            background: linear-gradient(135deg, #0f0c29, #302b63, #24243e); 
-            display: flex; justify-content: center; min-height: 100dvh; 
-        }
-        
-        .app-container { 
-            width: 100%; max-width: 480px; background-color: var(--bg-app); 
-            min-height: 100dvh; position: relative; overflow-x: hidden; 
-            display: flex; flex-direction: column; box-shadow: 0 0 60px rgba(0,0,0,0.5);
-        }
-        
-        /* HEADER PREMIUM */
-        .header-home { 
-            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%); 
-            color: white; padding: 40px 24px 28px; text-align: center; 
-            position: relative; overflow: hidden;
-        }
-        .header-home::before {
-            content: '';
-            position: absolute;
-            top: -50%; right: -50%;
-            width: 200%; height: 200%;
-            background: radial-gradient(circle, rgba(255,215,0,0.1) 0%, transparent 70%);
-            animation: headerGlow 4s ease-in-out infinite;
-        }
-        @keyframes headerGlow {
-            0%, 100% { transform: translate(0, 0); }
-            50% { transform: translate(-10%, -10%); }
-        }
-        .header-home h1 { 
-            font-size: 28px; font-weight: 900; position: relative; z-index: 1;
-            background: linear-gradient(135deg, var(--accent), #fff);
-            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
-            margin-bottom: 4px; letter-spacing: -1px;
-        }
+        .header-home { background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%); color: white; padding: 40px 24px 28px; text-align: center; position: relative; overflow: hidden; }
+        .header-home::before { content: ''; position: absolute; top: -50%; right: -50%; width: 200%; height: 200%; background: radial-gradient(circle, rgba(255,215,0,0.1) 0%, transparent 70%); animation: headerGlow 4s ease-in-out infinite; }
+        @keyframes headerGlow { 0%, 100% { transform: translate(0, 0); } 50% { transform: translate(-10%, -10%); } }
+        .header-home h1 { font-size: 28px; font-weight: 900; position: relative; z-index: 1; background: linear-gradient(135deg, var(--accent), #fff); -webkit-background-clip: text; -webkit-text-fill-color: transparent; margin-bottom: 4px; }
         .header-home p { font-size: 13px; font-weight: 400; opacity: 0.8; position: relative; z-index: 1; }
         
-        .header-pedido, .header-sub { 
-            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%); 
-            color: white; padding: 20px 24px; display: flex; align-items: center; gap: 16px;
-            position: relative; overflow: hidden;
-        }
-        .back-btn { 
-            background: rgba(255,255,255,0.12); border: 1px solid rgba(255,255,255,0.2); 
-            color: white; width: 40px; height: 40px; border-radius: 50%; font-size: 18px; 
-            cursor: pointer; display: flex; align-items: center; justify-content: center;
-            transition: all 0.3s; flex-shrink: 0; backdrop-filter: blur(10px);
-        }
-        .back-btn:hover { background: rgba(255,255,255,0.25); transform: scale(1.05); }
+        .header-pedido, .header-sub { background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%); color: white; padding: 20px 24px; display: flex; align-items: center; gap: 16px; }
+        .back-btn { background: rgba(255,255,255,0.12); border: 1px solid rgba(255,255,255,0.2); color: white; width: 40px; height: 40px; border-radius: 50%; font-size: 18px; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: all 0.3s; flex-shrink: 0; }
+        .back-btn:hover { background: rgba(255,255,255,0.25); }
         .header-title h1 { font-size: 18px; font-weight: 700; color: white; }
         .header-title p { font-size: 12px; opacity: 0.7; }
 
-        /* SEARCH BAR ESTILO UBER */
-        .search-container {
-            margin: -28px 20px 20px;
-            position: relative;
-            z-index: 20;
-        }
-        .search-bar-uber { 
-            background: var(--bg-card); border-radius: 20px; 
-            padding: 6px; box-shadow: var(--shadow-xl); 
-            display: flex; align-items: center; gap: 4px;
-            border: 2px solid transparent;
-            transition: all 0.3s;
-        }
-        .search-bar-uber:focus-within { 
-            border-color: var(--accent);
-            box-shadow: 0 0 0 4px rgba(255,215,0,0.15), var(--shadow-xl);
-        }
-        .search-icon-uber {
-            width: 48px; height: 48px; border-radius: 14px;
-            background: linear-gradient(135deg, #1a1a2e, #16213e);
-            display: flex; align-items: center; justify-content: center;
-            font-size: 20px; flex-shrink: 0;
-        }
-        .search-bar-uber input { 
-            border: none; outline: none; width: 100%; font-size: 15px; 
-            padding: 12px 8px; color: var(--text-main); background: transparent;
-            font-weight: 500;
-        }
+        /* SEARCH UBER */
+        .search-container { margin: -28px 20px 20px; position: relative; z-index: 20; }
+        .search-bar-uber { background: var(--bg-card); border-radius: 20px; padding: 6px; box-shadow: 0 20px 40px rgba(0,0,0,0.15); display: flex; align-items: center; gap: 4px; border: 2px solid transparent; transition: all 0.3s; }
+        .search-bar-uber:focus-within { border-color: var(--accent); box-shadow: 0 0 0 4px rgba(255,215,0,0.15), 0 20px 40px rgba(0,0,0,0.15); }
+        .search-icon-uber { width: 48px; height: 48px; border-radius: 14px; background: linear-gradient(135deg, #1a1a2e, #16213e); display: flex; align-items: center; justify-content: center; font-size: 20px; flex-shrink: 0; }
+        .search-bar-uber input { border: none; outline: none; width: 100%; font-size: 15px; padding: 12px 8px; color: var(--text-main); background: transparent; font-weight: 500; }
         .search-bar-uber input::placeholder { color: #94a3b8; }
-        .search-clear {
-            width: 36px; height: 36px; border-radius: 50%; border: none;
-            background: #f1f5f9; color: var(--text-muted); cursor: pointer;
-            font-size: 14px; display: none; align-items: center; justify-content: center;
-            margin-right: 4px; transition: all 0.2s;
-        }
+        .search-clear { width: 36px; height: 36px; border-radius: 50%; border: none; background: #f1f5f9; color: var(--text-muted); cursor: pointer; font-size: 14px; display: none; align-items: center; justify-content: center; margin-right: 4px; transition: all 0.2s; }
         .search-clear:hover { background: #e2e8f0; }
         .search-clear.visible { display: flex; }
         
-        .section-title { 
-            padding: 0 24px; font-size: 12px; color: var(--text-muted); 
-            text-transform: uppercase; letter-spacing: 2px; margin-bottom: 16px; 
-            font-weight: 700; display: flex; align-items: center; gap: 8px;
-        }
-        .section-title::after {
-            content: ''; flex: 1; height: 1px; background: var(--border);
-        }
+        .section-title { padding: 0 24px; font-size: 12px; color: var(--text-muted); text-transform: uppercase; letter-spacing: 2px; margin-bottom: 16px; font-weight: 700; display: flex; align-items: center; gap: 8px; }
+        .section-title::after { content: ''; flex: 1; height: 1px; background: var(--border); }
         
-        /* CATEGORY CARDS MELHORADOS */
         .category-list { padding: 0 20px 120px; display: flex; flex-direction: column; gap: 10px; }
-        .category-btn { 
-            display: flex; align-items: center; background: var(--bg-card); 
-            border: 1px solid var(--border); border-radius: 18px; padding: 14px 16px; 
-            cursor: pointer; transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); 
-            text-align: left; width: 100%; box-shadow: var(--shadow-sm); 
-            position: relative; overflow: hidden;
-        }
-        .category-btn::after {
-            content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100%;
-            background: linear-gradient(135deg, rgba(26,26,46,0.03), transparent);
-            opacity: 0; transition: opacity 0.3s;
-        }
-        .category-btn:hover { 
-            transform: translateY(-3px); 
-            box-shadow: var(--shadow-lg); 
-            border-color: #1a1a2e;
-        }
-        .category-btn:hover::after { opacity: 1; }
-        .category-btn.active { 
-            border-color: var(--accent); 
-            background: linear-gradient(135deg, #fffbeb, #fff7e0);
-            box-shadow: 0 0 0 3px rgba(255,215,0,0.15);
-        }
+        .category-btn { display: flex; align-items: center; background: var(--bg-card); border: 1px solid var(--border); border-radius: 18px; padding: 14px 16px; cursor: pointer; transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); text-align: left; width: 100%; box-shadow: 0 1px 2px rgba(0,0,0,0.05); position: relative; overflow: hidden; }
+        .category-btn:hover { transform: translateY(-3px); box-shadow: 0 12px 30px rgba(0,0,0,0.1); border-color: #1a1a2e; }
+        .category-btn.active { border-color: var(--accent); background: linear-gradient(135deg, #fffbeb, #fff7e0); box-shadow: 0 0 0 3px rgba(255,215,0,0.15); }
         
-        /* ÍCONES PREMIUM COM CORES */
-        .category-icon { 
-            width: 52px; height: 52px; border-radius: 16px; 
-            display: flex; align-items: center; justify-content: center; 
-            margin-right: 14px; flex-shrink: 0; font-size: 26px;
-            transition: all 0.3s;
-        }
+        .category-icon { width: 52px; height: 52px; border-radius: 16px; display: flex; align-items: center; justify-content: center; margin-right: 14px; flex-shrink: 0; font-size: 26px; transition: all 0.3s; }
         .category-btn:hover .category-icon { transform: scale(1.1); }
-        
-        /* Cores por categoria */
-        .icon-servente { background: #fef3c7; }
-        .icon-diarista { background: #dbeafe; }
-        .icon-assistencia { background: #fce7f3; }
-        .icon-montador { background: #e0e7ff; }
-        .icon-chaveiro { background: #fee2e2; }
-        .icon-eletricista { background: #fff7ed; }
-        .icon-encanador { background: #dcfce7; }
-        .icon-ar { background: #e0f2fe; }
-        .icon-jardineiro { background: #f0fdf4; }
-        .icon-eventos { background: #fef9c3; }
-        .icon-pedreiro { background: #fed7aa; }
-        .icon-gesseiro { background: #f5f5f4; }
-        .icon-pintor { background: #ede9fe; }
-        .icon-dedetizador { background: #fce4ec; }
-        .icon-marceneiro { background: #fff3e0; }
-        .icon-serralheiro { background: #eceff1; }
-        .icon-viagens { background: #e3f2fd; }
-        .icon-tosa { background: #f3e5f5; }
-        .icon-beleza { background: #fce4ec; }
-        .icon-vidraceiro { background: #e8eaf6; }
-        .icon-info { background: #e8f5e9; }
-        .icon-personal { background: #fff8e1; }
+        .icon-servente{background:#fef3c7}.icon-diarista{background:#dbeafe}.icon-assistencia{background:#fce7f3}.icon-montador{background:#e0e7ff}.icon-chaveiro{background:#fee2e2}.icon-eletricista{background:#fff7ed}.icon-encanador{background:#dcfce7}.icon-ar{background:#e0f2fe}.icon-jardineiro{background:#f0fdf4}.icon-eventos{background:#fef9c3}.icon-pedreiro{background:#fed7aa}.icon-gesseiro{background:#f5f5f4}.icon-pintor{background:#ede9fe}.icon-dedetizador{background:#fce4ec}.icon-marceneiro{background:#fff3e0}.icon-serralheiro{background:#eceff1}.icon-viagens{background:#e3f2fd}.icon-tosa{background:#f3e5f5}.icon-beleza{background:#fce4ec}.icon-vidraceiro{background:#e8eaf6}.icon-info{background:#e8f5e9}.icon-personal{background:#fff8e1}
         
         .category-info { flex: 1; min-width: 0; }
-        .category-info h3 { 
-            font-size: 14px; font-weight: 700; color: var(--text-main); 
-            margin-bottom: 2px; 
-        }
-        .category-info p { 
-            font-size: 11px; color: var(--text-muted); 
-            white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
-        }
-        .category-arrow { 
-            color: var(--text-muted); font-size: 20px; margin-left: 4px;
-            transition: transform 0.3s;
-        }
+        .category-info h3 { font-size: 14px; font-weight: 700; color: var(--text-main); margin-bottom: 2px; }
+        .category-info p { font-size: 11px; color: var(--text-muted); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+        .category-arrow { color: var(--text-muted); font-size: 20px; margin-left: 4px; transition: transform 0.3s; }
         .category-btn:hover .category-arrow { transform: translateX(4px); color: #1a1a2e; }
         
-        /* RESTO MANTIDO IGUAL */
         .form-section { padding: 24px; flex: 1; padding-bottom: 120px; }
         .form-group { margin-bottom: 24px; }
         .form-label { font-size: 13px; font-weight: 600; color: #1a1a2e; margin-bottom: 8px; display: block; text-transform: uppercase; letter-spacing: 0.5px; }
-        .custom-select, .custom-textarea, .custom-input { width: 100%; padding: 14px 16px; border: 2px solid var(--border); border-radius: 14px; font-size: 15px; color: var(--text-main); background-color: var(--bg-card); outline: none; transition: all 0.3s; }
+        .custom-select, .custom-textarea, .custom-input { width: 100%; padding: 14px 16px; border: 2px solid var(--border); border-radius: 14px; font-size: 15px; color: var(--text-main); background: var(--bg-card); outline: none; transition: all 0.3s; }
         .custom-select { appearance: none; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='%2364748b'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M19 9l-7 7-7-7'%3E%3C/path%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 16px center; background-size: 20px; }
         .custom-select:focus, .custom-textarea:focus, .custom-input:focus { border-color: #1a1a2e; box-shadow: 0 0 0 4px rgba(26,26,46,0.08); }
         .custom-textarea { resize: none; height: 100px; }
         
-        .counter-container { display: flex; align-items: center; background: var(--bg-card); border: 2px solid var(--border); border-radius: 14px; overflow: hidden; width: 140px; box-shadow: var(--shadow-sm); }
+        .counter-container { display: flex; align-items: center; background: var(--bg-card); border: 2px solid var(--border); border-radius: 14px; overflow: hidden; width: 140px; box-shadow: 0 1px 2px rgba(0,0,0,0.05); }
         .counter-btn { flex: 1; background: none; border: none; padding: 14px; font-size: 20px; color: #1a1a2e; cursor: pointer; font-weight: 600; transition: background 0.2s; }
         .counter-btn:hover { background: #f1f5f9; }
         .counter-display { flex: 1; text-align: center; font-size: 16px; font-weight: 700; border-left: 1px solid var(--border); border-right: 1px solid var(--border); padding: 14px 0; color: var(--text-main); }
@@ -223,36 +76,47 @@
         .btn-primary:disabled { background: #cbd5e1; color: #94a3b8; cursor: not-allowed; box-shadow: none; }
         .btn-secondary { width: 100%; background: linear-gradient(135deg, #1a1a2e, #16213e); color: var(--accent); border: 1px solid rgba(255,215,0,0.3); padding: 14px; border-radius: 14px; font-size: 14px; font-weight: 600; cursor: pointer; transition: all 0.3s; display: flex; align-items: center; justify-content: center; gap: 8px; }
         .btn-secondary:hover:not(:disabled) { transform: translateY(-2px); box-shadow: 0 8px 25px rgba(26,26,46,0.3); }
-        .btn-secondary:disabled { background: #cbd5e1; color: #94a3b8; cursor: not-allowed; border-color: transparent; }
-
+        
         .location-status { font-size: 13px; color: var(--text-muted); margin: 8px 0 12px; min-height: 20px; display: flex; align-items: center; gap: 6px; }
         .fallback-manual { animation: slideDown 0.3s ease-out; }
         .location-confirmed { background: #ecfdf5; color: #065f46; padding: 14px 16px; border-radius: 14px; font-size: 14px; font-weight: 500; border: 1px solid #a7f3d0; display: flex; justify-content: space-between; align-items: center; gap: 12px; }
         .btn-alterar { background: none; border: 1px solid #047857; color: #047857; padding: 6px 12px; border-radius: 8px; cursor: pointer; font-size: 13px; font-weight: 600; white-space: nowrap; transition: all 0.2s; }
         .btn-alterar:hover { background: #047857; color: white; }
-
+        
         @keyframes slideDown { from { opacity: 0; transform: translateY(-10px); } to { opacity: 1; transform: translateY(0); } }
 
-        .radar-screen { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(15, 23, 42, 0.9); backdrop-filter: blur(8px); display: none; flex-direction: column; justify-content: center; align-items: center; color: white; z-index: 999; text-align: center; padding: 24px; }
-        .radar { width: 120px; height: 120px; background: rgba(255, 193, 7, 0.12); border-radius: 50%; border: 3px solid var(--accent); display: flex; justify-content: center; align-items: center; position: relative; animation: pulse 2s infinite ease-out; margin-bottom: 28px; }
-        .radar-icon { font-size: 52px; filter: drop-shadow(0 4px 6px rgba(0,0,0,0.3)); }
-        @keyframes pulse { 0% { transform: scale(0.9); box-shadow: 0 0 0 0 rgba(255, 193, 7, 0.6); } 70% { transform: scale(1.08); box-shadow: 0 0 0 35px rgba(255, 193, 7, 0); } 100% { transform: scale(0.9); box-shadow: 0 0 0 0 rgba(255, 193, 7, 0); } }
-        .radar-screen h2 { font-size: 24px; font-weight: 700; margin-bottom: 8px; }
-        .radar-screen p { font-size: 15px; opacity: 0.8; max-width: 280px; line-height: 1.4; }
-        @keyframes spin { 100% { transform: rotate(360deg); } }
+        /* TELA DO MAPA ESTILO UBER */
+        .mapa-screen { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: #1a1a2e; z-index: 999; display: none; flex-direction: column; }
+        .mapa-header { background: linear-gradient(135deg, #1a1a2e, #16213e); color: white; padding: 20px 24px; display: flex; align-items: center; gap: 12px; z-index: 10; }
+        .mapa-header h2 { font-size: 16px; font-weight: 700; flex: 1; }
+        .mapa-header p { font-size: 11px; opacity: 0.7; }
+        .btn-cancelar-mapa { background: rgba(255,255,255,0.15); border: none; color: white; padding: 10px 16px; border-radius: 10px; font-weight: 600; font-size: 12px; cursor: pointer; }
+        #mapa { flex: 1; width: 100%; }
         
-        .empty-search { text-align: center; padding: 40px 20px; color: var(--text-muted); }
+        /* Cards dos profissionais no mapa */
+        .profissionais-lista { position: absolute; bottom: 20px; left: 20px; right: 20px; z-index: 5; display: flex; flex-direction: column; gap: 8px; max-height: 200px; overflow-y: auto; }
+        .prof-card-mapa { background: white; border-radius: 14px; padding: 14px; display: flex; align-items: center; gap: 12px; box-shadow: 0 8px 25px rgba(0,0,0,0.2); cursor: pointer; transition: all 0.3s; }
+        .prof-card-mapa:hover { transform: translateY(-2px); box-shadow: 0 12px 30px rgba(0,0,0,0.3); }
+        .prof-card-mapa .prof-avatar-mapa { width: 44px; height: 44px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 22px; flex-shrink: 0; }
+        .prof-card-mapa .prof-info-mapa { flex: 1; min-width: 0; }
+        .prof-card-mapa .prof-nome-mapa { font-size: 14px; font-weight: 700; }
+        .prof-card-mapa .prof-detalhes-mapa { font-size: 11px; color: var(--text-muted); display: flex; gap: 12px; margin-top: 2px; }
+        .prof-card-mapa .prof-distancia { font-size: 13px; font-weight: 700; color: #1a1a2e; text-align: right; }
+        .prof-card-mapa .prof-distancia small { font-size: 10px; color: var(--text-muted); display: block; }
+        
+        .status-busca { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); text-align: center; color: white; z-index: 5; }
+        .status-busca .radar-mapa { width: 80px; height: 80px; border-radius: 50%; border: 3px solid var(--accent); margin: 0 auto 16px; animation: pulse 2s infinite; display: flex; align-items: center; justify-content: center; font-size: 36px; }
+        @keyframes pulse { 0% { box-shadow: 0 0 0 0 rgba(255,193,7,0.6); } 70% { box-shadow: 0 0 0 30px rgba(255,193,7,0); } 100% { box-shadow: 0 0 0 0 rgba(255,193,7,0); } }
+        .status-busca p { font-size: 14px; opacity: 0.9; }
+        
+        .empty-search { text-align: center; padding: 40px 20px; color: var(--text-muted); display: none; }
         .empty-search i { font-size: 48px; margin-bottom: 12px; opacity: 0.4; }
     </style>
 </head>
 <body>
 
 <div class="app-container" id="tela-categorias">
-    <div class="header-home">
-        <h1>☀️ Alô Natal</h1>
-        <p>O melhor clube de serviços da cidade</p>
-    </div>
-
+    <div class="header-home"><h1>☀️ Alô Natal</h1><p>O melhor clube de serviços da cidade</p></div>
     <div class="search-container">
         <div class="search-bar-uber">
             <div class="search-icon-uber">🔍</div>
@@ -260,315 +124,320 @@
             <button class="search-clear" id="search-clear" onclick="limparBusca()">✕</button>
         </div>
     </div>
-
     <h2 class="section-title">Categorias</h2>
-
     <div class="category-list" id="lista-categorias"></div>
-    <div class="empty-search" id="empty-search" style="display:none;">
-        <i class="fas fa-search"></i>
-        <p>Nenhuma categoria encontrada</p>
-    </div>
-
-    <div class="footer-btn-container">
-        <button class="btn-primary" id="btn-proximo" disabled onclick="avancarParaPedido()">Próximo Passo</button>
-    </div>
+    <div class="empty-search" id="empty-search"><i class="fas fa-search"></i><p>Nenhuma categoria encontrada</p></div>
+    <div class="footer-btn-container"><button class="btn-primary" id="btn-proximo" disabled onclick="avancarParaPedido()">Próximo Passo</button></div>
 </div>
 
-<!-- DEMAIS TELAS MANTIDAS -->
 <div class="app-container" id="tela-subcategorias" style="display: none;">
-    <div class="header-sub">
-        <button class="back-btn" onclick="voltarParaCategorias()">←</button>
-        <div class="header-title"><h1 id="titulo-subcategoria">Serviço</h1><p>Escolha o tipo específico</p></div>
-    </div>
-    <div class="form-section" style="padding-bottom: 40px;">
-        <div class="category-list" id="lista-subcategorias" style="padding: 0;"></div>
-    </div>
+    <div class="header-sub"><button class="back-btn" onclick="voltarParaCategorias()">←</button><div class="header-title"><h1 id="titulo-subcategoria">Serviço</h1><p>Escolha o tipo específico</p></div></div>
+    <div class="form-section" style="padding-bottom: 40px;"><div class="category-list" id="lista-subcategorias" style="padding: 0;"></div></div>
 </div>
 
 <div class="app-container" id="tela-pedido" style="display: none;">
-    <div class="header-pedido">
-        <button class="back-btn" onclick="voltarDaTelaPedido()">←</button>
-        <div class="header-title"><h1 id="titulo-pedido">Serviço</h1><p>Detalhes do pedido</p></div>
-    </div>
+    <div class="header-pedido"><button class="back-btn" onclick="voltarDaTelaPedido()">←</button><div class="header-title"><h1 id="titulo-pedido">Serviço</h1><p>Detalhes do pedido</p></div></div>
     <div class="form-section">
-        <div class="form-group" id="location-group">
-            <label class="form-label">📍 Localização do Serviço</label>
-            <button id="btn-gps" class="btn-secondary" onclick="solicitarLocalizacao()">📡 Usar minha localização atual</button>
-            <p id="location-status" class="location-status"></p>
-            <div id="fallback-manual" class="fallback-manual" style="display: none;">
-                <p style="font-size: 13px; color: var(--action); margin-bottom: 10px; font-weight: 600;">Não foi possível acessar o GPS. Sem problemas!</p>
-                <input type="text" id="input-local" class="custom-input" placeholder="Ex: Lagoa Nova, Natal-RN" style="margin-bottom: 12px;">
-                <button class="btn-secondary" style="background: var(--success);" onclick="confirmarLocalizacaoManual()">Confirmar Bairro/CEP</button>
-            </div>
-            <div id="local-confirmado" class="location-confirmed" style="display: none;">
-                <span>📍 <strong id="texto-local-confirmado"></strong></span>
-                <button class="btn-alterar" onclick="resetarLocalizacao()">Alterar</button>
-            </div>
-        </div>
-        <div class="form-group"><label class="form-label">1. O que você precisa?</label><select class="custom-select" id="subcategoria"><option value="geral">Serviço Geral na Categoria</option><option value="especifico">Serviço Específico / Urgência</option><option value="orcamento">Apenas Orçamento</option></select></div>
-        <div class="form-group"><label class="form-label">2. Quantidade (Unidades/Cômodos)?</label><div class="counter-container"><button class="counter-btn" onclick="mudarQuantidade(-1)">−</button><div class="counter-display" id="quantidade">1</div><button class="counter-btn" onclick="mudarQuantidade(1)">+</button></div></div>
-        <div class="form-group"><label class="form-label">3. Observações (Opcional)</label><textarea class="custom-textarea" placeholder="Descreva detalhes adicionais sobre o serviço..."></textarea></div>
+        <div class="form-group" id="location-group"><label class="form-label">📍 Localização</label><button id="btn-gps" class="btn-secondary" onclick="solicitarLocalizacao()">📡 Usar minha localização</button><p id="location-status" class="location-status"></p><div id="fallback-manual" class="fallback-manual" style="display: none;"><p style="font-size:13px;color:var(--action);margin-bottom:10px;font-weight:600;">Não foi possível acessar o GPS.</p><input type="text" id="input-local" class="custom-input" placeholder="Ex: Lagoa Nova, Natal-RN" style="margin-bottom:12px;"><button class="btn-secondary" style="background:var(--success);" onclick="confirmarLocalizacaoManual()">Confirmar Bairro/CEP</button></div><div id="local-confirmado" class="location-confirmed" style="display:none;"><span>📍 <strong id="texto-local-confirmado"></strong></span><button class="btn-alterar" onclick="resetarLocalizacao()">Alterar</button></div></div>
+        <div class="form-group"><label class="form-label">O que você precisa?</label><select class="custom-select" id="subcategoria"><option value="geral">Serviço Geral</option><option value="especifico">Serviço Específico</option><option value="orcamento">Apenas Orçamento</option></select></div>
+        <div class="form-group"><label class="form-label">Quantidade</label><div class="counter-container"><button class="counter-btn" onclick="mudarQuantidade(-1)">−</button><div class="counter-display" id="quantidade">1</div><button class="counter-btn" onclick="mudarQuantidade(1)">+</button></div></div>
+        <div class="form-group"><label class="form-label">Observações</label><textarea class="custom-textarea" placeholder="Descreva detalhes..."></textarea></div>
     </div>
     <div class="footer-btn-container"><button class="btn-primary" onclick="buscarProfissionais()">📍 Buscar Profissionais</button></div>
 </div>
 
-<div class="radar-screen" id="telaRadar">
-    <div class="radar"><span class="radar-icon">📍</span></div>
-    <h2>Buscando Parceiros...</h2>
-    <p id="radar-texto">Localizando profissionais qualificados na sua região.</p>
+<!-- TELA DO MAPA ESTILO UBER -->
+<div class="mapa-screen" id="mapa-screen">
+    <div class="mapa-header">
+        <button class="back-btn" onclick="fecharMapa()">←</button>
+        <div><h2>🔍 Buscando parceiros...</h2><p id="mapa-status-texto">Procurando os melhores profissionais</p></div>
+        <button class="btn-cancelar-mapa" onclick="fecharMapa()">Cancelar</button>
+    </div>
+    <div id="mapa"></div>
+    <div class="status-busca" id="status-busca"><div class="radar-mapa">📍</div><p>Localizando profissionais próximos...</p></div>
+    <div class="profissionais-lista" id="profissionais-lista"></div>
 </div>
 
+<!-- Google Maps API -->
+<script src="https://maps.googleapis.com/maps/api/js?key=SUA_CHAVE_API&libraries=places"></script>
+
 <script>
-    // ÍCONES COLORIDOS POR CATEGORIA
-    const ICONES = {
-        'Servente / Ajudante': { emoji: '🪵', iconClass: 'icon-servente', desc: 'Limpeza de entulho, diárias e cargas', sub: ['Limpeza de entulho', 'Carga e descarga', 'Diárias gerais', 'Ajuda em mudanças', 'Remoção de móveis'] },
-        'Diarista / Faxineira': { emoji: '🧹', iconClass: 'icon-diarista', desc: 'Limpeza comum, pesada ou pós-obra', sub: ['Limpeza comum', 'Limpeza pesada', 'Limpeza pós-obra', 'Limpeza de apartamentos', 'Limpeza de casas'] },
-        'Assistência Domiciliar': { emoji: '🔧', iconClass: 'icon-assistencia', desc: 'Pequenos reparos e instalações', sub: ['Pequenos reparos', 'Instalações diversas', 'Troca de lâmpadas', 'Consertos gerais', 'Ajustes domésticos'] },
-        'Montador de Móveis': { emoji: '🪑', iconClass: 'icon-montador', desc: 'Montagem e desmontagem em geral', sub: ['Montagem de móveis', 'Desmontagem para mudança', 'Ajustes e reparos', 'Instalação de prateleiras', 'Montagem de armários'] },
-        'Chaveiro': { emoji: '🔑', iconClass: 'icon-chaveiro', desc: 'Abertura de portas, cópias e fechaduras', sub: ['Abertura de portas', 'Cópia de chaves', 'Troca de fechaduras', 'Chave automotiva', 'Abertura de cofres'] },
-        'Eletricista Residencial': { emoji: '⚡', iconClass: 'icon-eletricista', desc: 'Reparos, chuveiros e fiação', sub: ['Instalação de chuveiro', 'Reparo de fiação', 'Troca de tomadas', 'Instalação de luminárias', 'Curto-circuito'] },
-        'Encanador': { emoji: '🔧', iconClass: 'icon-encanador', desc: 'Vazamentos e desentupimentos', sub: ['Reparo de vazamentos', 'Desentupimento de pia', 'Desentupimento de vaso', 'Instalação hidráulica', 'Troca de torneiras'] },
-        'Ar-Condicionado': { emoji: '❄️', iconClass: 'icon-ar', desc: 'Instalação, limpeza e manutenção', sub: ['Instalação', 'Limpeza e manutenção', 'Recarga de gás', 'Reparo de defeitos', 'Remoção e reinstalação'] },
-        'Jardineiro': { emoji: '🌿', iconClass: 'icon-jardineiro', desc: 'Poda, limpeza de quintal e paisagismo', sub: ['Poda de árvores', 'Limpeza de quintal', 'Paisagismo', 'Corte de grama', 'Jardinagem geral'] },
-        'Eventos e Locação': { emoji: '🎉', iconClass: 'icon-eventos', desc: 'Mesas, cadeiras, brinquedos e festas', sub: ['Aluguel de mesas e cadeiras', 'Brinquedos para festa', 'Decoração', 'Som e iluminação', 'Locação de equipamentos'] },
-        'Pedreiro': { emoji: '🧱', iconClass: 'icon-pedreiro', desc: 'Reformas, pisos e revestimentos', sub: ['Reformas', 'Assentamento de pisos', 'Azulejos e revestimentos', 'Pequenas construções', 'Reparos em alvenaria'] },
-        'Gesseiro': { emoji: '🏗️', iconClass: 'icon-gesseiro', desc: 'Forros, paredes 3D e molduras', sub: ['Forro de gesso', 'Paredes 3D', 'Molduras e sancas', 'Reparos em gesso', 'Divisórias'] },
-        'Pintor Residencial': { emoji: '🎨', iconClass: 'icon-pintor', desc: 'Pintura interna, externa e texturas', sub: ['Pintura interna', 'Pintura externa', 'Texturas e efeitos', 'Pintura de móveis', 'Preparação de superfícies'] },
-        'Dedetizador': { emoji: '🪳', iconClass: 'icon-dedetizador', desc: 'Desinsetização e controle de pragas', sub: ['Dedetização residencial', 'Dedetização comercial', 'Controle de pragas', 'Desinsetização', 'Dedetização pós-obra'] },
-        'Marceneiro': { emoji: '🪚', iconClass: 'icon-marceneiro', desc: 'Móveis e reparos em madeira', sub: ['Móveis sob medida', 'Cozinhas planejadas', 'Reparos em móveis', 'Portas e rodapés', 'Estantes e nichos'] },
-        'Serralheiro': { emoji: '⛓️', iconClass: 'icon-serralheiro', desc: 'Estruturas metálicas e portões', sub: ['Portões e grades', 'Corrimãos', 'Estruturas metálicas', 'Soldas e reparos', 'Portas de ferro'] },
-        'Viagens': { emoji: '🚗', iconClass: 'icon-viagens', desc: 'Motorista particular e deslocamentos', sub: ['Motorista particular', 'Viagens intermunicipais', 'Leva e traz', 'Viagens longas', 'Passeios turísticos'] },
-        'Tosa Pet': { emoji: '🐕', iconClass: 'icon-tosa', desc: 'Cuidados com seu pet', sub: ['Tosa higiênica', 'Tosa completa', 'Banho', 'Táxi pet / Veterinário', 'Tosa na máquina'] },
-        'Beleza': { emoji: '💇', iconClass: 'icon-beleza', desc: 'Serviços de beleza em casa', sub: ['Manicure / Pedicure', 'Cabelo (corte/escova)', 'Design de sobrancelha', 'Maquiagem', 'Depilação', 'Massagem relaxante'] },
-        'Vidraceiro': { emoji: '🪟', iconClass: 'icon-vidraceiro', desc: 'Vidros, espelhos e box', sub: ['Box de banheiro', 'Espelhos', 'Janelas e portas de vidro', 'Vidros temperados', 'Vidraçaria em geral'] },
-        'Técnico em Informática': { emoji: '💻', iconClass: 'icon-info', desc: 'Reparos e suporte em computadores', sub: ['Formatação e Windows', 'Remoção de Vírus', 'Upgrade / Lentidão', 'Redes e Wi-Fi', 'Backup de Dados', 'Instalação de Programas'] },
-        'Personal Trainer': { emoji: '💪', iconClass: 'icon-personal', desc: 'Treinamento físico personalizado', sub: ['Musculação / Funcional', 'Pilates / Yoga', 'Treino para Gestantes', 'Treino para Idosos', 'Emagrecimento', 'Reabilitação / Fisioterapia'] }
-    };
+// ==================== CATEGORIAS ====================
+const ICONES = {
+    'Servente / Ajudante': { emoji: '🪵', iconClass: 'icon-servente', desc: 'Limpeza de entulho, diárias e cargas', sub: ['Limpeza de entulho', 'Carga e descarga', 'Diárias gerais'] },
+    'Diarista / Faxineira': { emoji: '🧹', iconClass: 'icon-diarista', desc: 'Limpeza comum, pesada ou pós-obra', sub: ['Limpeza comum', 'Limpeza pesada', 'Limpeza pós-obra'] },
+    'Eletricista Residencial': { emoji: '⚡', iconClass: 'icon-eletricista', desc: 'Reparos, chuveiros e fiação', sub: ['Instalação de chuveiro', 'Reparo de fiação', 'Troca de tomadas'] },
+    'Encanador': { emoji: '🔧', iconClass: 'icon-encanador', desc: 'Vazamentos e desentupimentos', sub: ['Reparo de vazamentos', 'Desentupimento', 'Instalação hidráulica'] },
+    'Pedreiro': { emoji: '🧱', iconClass: 'icon-pedreiro', desc: 'Reformas, pisos e revestimentos', sub: ['Reformas', 'Assentamento de pisos', 'Azulejos'] },
+    'Pintor Residencial': { emoji: '🎨', iconClass: 'icon-pintor', desc: 'Pintura interna, externa e texturas', sub: ['Pintura interna', 'Pintura externa', 'Texturas'] },
+    'Chaveiro': { emoji: '🔑', iconClass: 'icon-chaveiro', desc: 'Abertura de portas, cópias', sub: ['Abertura de portas', 'Cópia de chaves', 'Troca de fechaduras'] },
+    'Ar-Condicionado': { emoji: '❄️', iconClass: 'icon-ar', desc: 'Instalação, limpeza e manutenção', sub: ['Instalação', 'Limpeza', 'Recarga de gás'] },
+    'Montador de Móveis': { emoji: '🪑', iconClass: 'icon-montador', desc: 'Montagem e desmontagem', sub: ['Montagem', 'Desmontagem', 'Ajustes'] },
+    'Marceneiro': { emoji: '🪚', iconClass: 'icon-marceneiro', desc: 'Móveis e reparos em madeira', sub: ['Móveis sob medida', 'Reparos', 'Portas e rodapés'] },
+    'Serralheiro': { emoji: '⛓️', iconClass: 'icon-serralheiro', desc: 'Estruturas metálicas e portões', sub: ['Portões e grades', 'Corrimãos', 'Soldas'] },
+    'Gesseiro': { emoji: '🏗️', iconClass: 'icon-gesseiro', desc: 'Forros, paredes 3D e molduras', sub: ['Forro de gesso', 'Paredes 3D', 'Molduras'] },
+    'Vidraceiro': { emoji: '🪟', iconClass: 'icon-vidraceiro', desc: 'Vidros, espelhos e box', sub: ['Box de banheiro', 'Espelhos', 'Janelas'] },
+    'Dedetizador': { emoji: '🪳', iconClass: 'icon-dedetizador', desc: 'Desinsetização e controle de pragas', sub: ['Dedetização', 'Controle de pragas'] },
+    'Jardineiro': { emoji: '🌿', iconClass: 'icon-jardineiro', desc: 'Poda, limpeza de quintal', sub: ['Poda', 'Limpeza de quintal', 'Paisagismo'] },
+    'Beleza': { emoji: '💇', iconClass: 'icon-beleza', desc: 'Serviços de beleza em casa', sub: ['Manicure', 'Cabelo', 'Maquiagem'] },
+    'Tosa Pet': { emoji: '🐕', iconClass: 'icon-tosa', desc: 'Cuidados com seu pet', sub: ['Tosa', 'Banho'] },
+    'Personal Trainer': { emoji: '💪', iconClass: 'icon-personal', desc: 'Treinamento físico personalizado', sub: ['Musculação', 'Pilates', 'Emagrecimento'] },
+    'Técnico em Informática': { emoji: '💻', iconClass: 'icon-info', desc: 'Reparos em computadores', sub: ['Formatação', 'Remoção de Vírus', 'Redes'] },
+    'Viagens': { emoji: '🚗', iconClass: 'icon-viagens', desc: 'Motorista particular', sub: ['Motorista', 'Viagens'] },
+    'Eventos e Locação': { emoji: '🎉', iconClass: 'icon-eventos', desc: 'Mesas, cadeiras, festas', sub: ['Aluguel de mesas', 'Decoração'] }
+};
 
-    let categoriaSelecionada = '';
-    let iconeSelecionado = '';
-    let iconClassSelecionada = '';
-    let subcategoriaSelecionada = '';
-    let quantidadeAtual = 1;
-    let localizacaoAtual = null;
-    let veioDeSubcategoria = false;
+let categoriaSelecionada = '', iconeSelecionado = '', iconClassSelecionada = '', subcategoriaSelecionada = '';
+let quantidadeAtual = 1, localizacaoAtual = null, veioDeSubcategoria = false;
+let mapa, marcadores = [];
 
-    function renderizarCategorias() {
-        const lista = document.getElementById('lista-categorias');
-        lista.innerHTML = '';
-        
-        Object.keys(ICONES).forEach(nome => {
-            const cat = ICONES[nome];
-            const temSub = cat.sub && cat.sub.length > 0;
-            
-            const btn = document.createElement('button');
-            btn.className = 'category-btn' + (temSub ? ' has-sub' : '');
-            btn.setAttribute('data-nome', nome.toLowerCase());
-            btn.innerHTML = `
-                <span class="category-icon ${cat.iconClass}">${cat.emoji}</span>
-                <div class="category-info">
-                    <h3>${nome}</h3>
-                    <p>${cat.desc}</p>
-                </div>
-                <span class="category-arrow">›</span>
-            `;
-            btn.onclick = () => selecionarCategoria(nome, cat.emoji, cat.iconClass, btn);
-            lista.appendChild(btn);
-        });
-    }
+// Simular profissionais próximos
+const profissionaisSimulados = [
+    { nome: 'Seu Jorge', categoria: 'Eletricista Residencial', avaliacao: 4.9, lat: -5.8366, lng: -35.2119, avatar: '👷‍♂️' },
+    { nome: 'Maria Silva', categoria: 'Diarista / Faxineira', avaliacao: 4.7, lat: -5.8420, lng: -35.2050, avatar: '👩‍🔧' },
+    { nome: 'Carlos Santos', categoria: 'Encanador', avaliacao: 4.8, lat: -5.8300, lng: -35.2200, avatar: '👨‍🔧' },
+    { nome: 'Ana Costa', categoria: 'Pintor Residencial', avaliacao: 4.5, lat: -5.8400, lng: -35.2150, avatar: '👩‍🎨' },
+    { nome: 'Pedro Lima', categoria: 'Pedreiro', avaliacao: 4.6, lat: -5.8380, lng: -35.2180, avatar: '👷' },
+];
 
-    function selecionarCategoria(nome, emoji, iconClass, elementoBtn) {
-        categoriaSelecionada = nome;
-        iconeSelecionado = emoji;
-        iconClassSelecionada = iconClass;
-        subcategoriaSelecionada = '';
-        
-        document.querySelectorAll('#lista-categorias .category-btn').forEach(btn => btn.classList.remove('active'));
-        elementoBtn.classList.add('active');
-        
-        const btnProximo = document.getElementById('btn-proximo');
-        btnProximo.disabled = false;
-        
+function renderizarCategorias() {
+    const lista = document.getElementById('lista-categorias'); lista.innerHTML = '';
+    Object.keys(ICONES).forEach(nome => {
         const cat = ICONES[nome];
-        const temSub = cat.sub && cat.sub.length > 0;
-        btnProximo.innerText = temSub ? `Escolher tipo de ${nome}` : `Continuar com ${nome}`;
-    }
+        const btn = document.createElement('button');
+        btn.className = 'category-btn has-sub';
+        btn.setAttribute('data-nome', nome.toLowerCase());
+        btn.innerHTML = `<span class="category-icon ${cat.iconClass}">${cat.emoji}</span><div class="category-info"><h3>${nome}</h3><p>${cat.desc}</p></div><span class="category-arrow">›</span>`;
+        btn.onclick = () => selecionarCategoria(nome, cat.emoji, cat.iconClass, btn);
+        lista.appendChild(btn);
+    });
+}
 
-    function limparBusca() {
-        document.getElementById('input-busca').value = '';
-        filtrarCategorias();
-    }
+function selecionarCategoria(nome, emoji, iconClass, btn) {
+    categoriaSelecionada = nome; iconeSelecionado = emoji; iconClassSelecionada = iconClass; subcategoriaSelecionada = '';
+    document.querySelectorAll('#lista-categorias .category-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    document.getElementById('btn-proximo').disabled = false;
+    document.getElementById('btn-proximo').innerText = `Escolher tipo de ${nome}`;
+}
 
-    function filtrarCategorias() {
-        const termo = document.getElementById('input-busca').value.toLowerCase();
-        const clearBtn = document.getElementById('search-clear');
-        let encontrou = false;
-        
-        clearBtn.classList.toggle('visible', termo.length > 0);
-        
-        document.querySelectorAll('#lista-categorias .category-btn').forEach(btn => {
-            const nome = btn.getAttribute('data-nome');
-            const visivel = nome.includes(termo);
-            btn.style.display = visivel ? 'flex' : 'none';
-            if(visivel) encontrou = true;
+function filtrarCategorias() {
+    const termo = document.getElementById('input-busca').value.toLowerCase();
+    document.getElementById('search-clear').classList.toggle('visible', termo.length > 0);
+    let encontrou = false;
+    document.querySelectorAll('#lista-categorias .category-btn').forEach(btn => {
+        const visivel = btn.getAttribute('data-nome').includes(termo);
+        btn.style.display = visivel ? 'flex' : 'none';
+        if(visivel) encontrou = true;
+    });
+    document.getElementById('empty-search').style.display = encontrou ? 'none' : 'block';
+}
+
+function limparBusca() { document.getElementById('input-busca').value = ''; filtrarCategorias(); }
+
+function avancarParaPedido() {
+    if(!categoriaSelecionada) return;
+    document.getElementById('titulo-subcategoria').innerText = `${iconeSelecionado} ${categoriaSelecionada}`;
+    renderizarSubcategorias();
+    document.getElementById('tela-categorias').style.display = 'none';
+    document.getElementById('tela-subcategorias').style.display = 'flex';
+}
+
+function renderizarSubcategorias() {
+    const lista = document.getElementById('lista-subcategorias'); lista.innerHTML = '';
+    ICONES[categoriaSelecionada].sub.forEach(sub => {
+        const btn = document.createElement('button'); btn.className = 'category-btn';
+        btn.innerHTML = `<span class="category-icon ${iconClassSelecionada}">${iconeSelecionado}</span><div class="category-info"><h3>${sub}</h3><p>${categoriaSelecionada}</p></div><span class="category-arrow">›</span>`;
+        btn.onclick = () => { subcategoriaSelecionada = sub; veioDeSubcategoria = true; abrirTelaPedido(); };
+        lista.appendChild(btn);
+    });
+}
+
+function abrirTelaPedido() {
+    document.getElementById('tela-categorias').style.display = 'none';
+    document.getElementById('tela-subcategorias').style.display = 'none';
+    document.getElementById('tela-pedido').style.display = 'flex';
+    document.getElementById('titulo-pedido').innerText = subcategoriaSelecionada ? `${iconeSelecionado} ${subcategoriaSelecionada}` : `${iconeSelecionado} ${categoriaSelecionada}`;
+    solicitarLocalizacao();
+}
+
+function voltarParaCategorias() { document.getElementById('tela-subcategorias').style.display = 'none'; document.getElementById('tela-categorias').style.display = 'flex'; }
+function voltarDaTelaPedido() { document.getElementById('tela-pedido').style.display = 'none'; veioDeSubcategoria ? (document.getElementById('tela-subcategorias').style.display = 'flex', renderizarSubcategorias()) : document.getElementById('tela-categorias').style.display = 'flex'; }
+function mudarQuantidade(v) { quantidadeAtual += v; if(quantidadeAtual < 1) quantidadeAtual = 1; if(quantidadeAtual > 10) quantidadeAtual = 10; document.getElementById('quantidade').innerText = quantidadeAtual; }
+
+// ==================== LOCALIZAÇÃO ====================
+function solicitarLocalizacao() {
+    const btn = document.getElementById('btn-gps'); btn.style.display = 'flex'; btn.disabled = true;
+    btn.innerHTML = '<span style="animation:spin 1s linear infinite;">⏳</span> Buscando...';
+    document.getElementById('location-status').innerHTML = '<span>📡 Aguardando permissão...</span>';
+    document.getElementById('fallback-manual').style.display = 'none';
+    document.getElementById('local-confirmado').style.display = 'none';
+    localizacaoAtual = null;
+    if(!navigator.geolocation) { tratarErroGeolocalizacao('GPS não suportado.'); return; }
+    navigator.geolocation.getCurrentPosition(
+        async (pos) => {
+            const lat = pos.coords.latitude, lon = pos.coords.longitude;
+            document.getElementById('location-status').innerHTML = '<span>🔄 Identificando bairro...</span>';
+            let nome = null;
+            try {
+                const res = await fetch(`https://nominatim.openstreetmap.org/reverse?format=jsonv2&lat=${lat}&lon=${lon}&zoom=18&addressdetails=1&accept-language=pt-BR`);
+                const data = await res.json();
+                const addr = data.address || {};
+                nome = addr.neighbourhood || addr.suburb || addr.quarter || addr.city_district || addr.town || addr.city || addr.village;
+                if(nome) nome = `${nome}, ${addr.city || addr.town || 'Natal'} - ${addr.state || 'RN'}`;
+            } catch(e) {}
+            if(!nome) nome = `GPS (${lat.toFixed(4)}, ${lon.toFixed(4)})`;
+            localizacaoAtual = { lat, lon, nome, tipo: 'gps' };
+            exibirLocalConfirmada(nome);
+        },
+        (err) => {
+            let msg = 'Erro ao obter localização.';
+            if(err.code === 1) msg = 'Permissão negada.';
+            else if(err.code === 2) msg = 'Sinal indisponível.';
+            else if(err.code === 3) msg = 'Tempo esgotado.';
+            tratarErroGeolocalizacao(msg);
+        },
+        { timeout: 15000, enableHighAccuracy: true }
+    );
+}
+
+function tratarErroGeolocalizacao(msg) {
+    document.getElementById('btn-gps').style.display = 'none';
+    document.getElementById('location-status').innerHTML = `<span style="color:var(--action);">️ ${msg}</span>`;
+    document.getElementById('fallback-manual').style.display = 'block';
+    document.getElementById('input-local').focus();
+}
+
+function confirmarLocalizacaoManual() {
+    const v = document.getElementById('input-local').value.trim();
+    if(v.length < 3) { alert('Digite um bairro válido.'); return; }
+    localizacaoAtual = { nome: v.includes('natal') ? v : v + ', Natal - RN', tipo: 'manual' };
+    exibirLocalConfirmada(localizacaoAtual.nome);
+}
+
+function exibirLocalConfirmada(texto) {
+    document.getElementById('btn-gps').style.display = 'none';
+    document.getElementById('location-status').style.display = 'none';
+    document.getElementById('fallback-manual').style.display = 'none';
+    document.getElementById('texto-local-confirmado').innerText = texto;
+    document.getElementById('local-confirmado').style.display = 'flex';
+}
+
+function resetarLocalizacao() {
+    localizacaoAtual = null;
+    document.getElementById('btn-gps').style.display = 'flex'; document.getElementById('btn-gps').disabled = false;
+    document.getElementById('btn-gps').innerHTML = '📡 Usar minha localização atual';
+    document.getElementById('location-status').style.display = 'flex'; document.getElementById('location-status').innerHTML = '';
+    document.getElementById('fallback-manual').style.display = 'none';
+    document.getElementById('local-confirmado').style.display = 'none';
+    setTimeout(() => solicitarLocalizacao(), 300);
+}
+
+// ==================== MAPA ESTILO UBER ====================
+function buscarProfissionais() {
+    if(!localizacaoAtual) { alert('⚠️ Informe sua localização.'); return; }
+    
+    document.getElementById('tela-pedido').style.display = 'none';
+    document.getElementById('mapa-screen').style.display = 'flex';
+    document.getElementById('status-busca').style.display = 'block';
+    document.getElementById('profissionais-lista').innerHTML = '';
+    
+    // Iniciar mapa
+    setTimeout(() => iniciarMapa(), 500);
+    
+    // Simular busca de 2 segundos
+    setTimeout(() => {
+        document.getElementById('status-busca').style.display = 'none';
+        document.getElementById('mapa-status-texto').innerText = `${profissionaisSimulados.length} profissionais encontrados`;
+        mostrarProfissionaisNoMapa();
+    }, 2000);
+}
+
+function iniciarMapa() {
+    const centro = localizacaoAtual.tipo === 'gps' ? { lat: localizacaoAtual.lat, lng: localizacaoAtual.lon } : { lat: -5.8366, lng: -35.2119 };
+    
+    mapa = new google.maps.Map(document.getElementById('mapa'), {
+        center: centro,
+        zoom: 14,
+        styles: [
+            { "featureType": "all", "elementType": "geometry", "stylers": [{ "color": "#242f3e" }] },
+            { "featureType": "all", "elementType": "labels.text.fill", "stylers": [{ "color": "#746855" }] },
+            { "featureType": "all", "elementType": "labels.text.stroke", "stylers": [{ "color": "#242f3e" }] },
+            { "featureType": "road", "elementType": "geometry", "stylers": [{ "color": "#38414e" }] },
+            { "featureType": "road", "elementType": "geometry.stroke", "stylers": [{ "color": "#212a37" }] },
+            { "featureType": "water", "elementType": "geometry", "stylers": [{ "color": "#17263c" }] }
+        ],
+        zoomControl: true,
+        mapTypeControl: false,
+        streetViewControl: false,
+        fullscreenControl: false
+    });
+    
+    // Marcar localização do cliente
+    if(localizacaoAtual.tipo === 'gps') {
+        new google.maps.Marker({
+            position: { lat: localizacaoAtual.lat, lng: localizacaoAtual.lon },
+            map: mapa,
+            icon: { url: 'data:image/svg+xml,' + encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" fill="#4285F4" stroke="white" stroke-width="3"/><circle cx="12" cy="12" r="4" fill="white"/></svg>') },
+            title: 'Sua localização',
+            zIndex: 1000
         });
+    }
+}
+
+function mostrarProfissionaisNoMapa() {
+    const lista = document.getElementById('profissionais-lista');
+    lista.innerHTML = '';
+    marcadores.forEach(m => m.setMap(null));
+    marcadores = [];
+    
+    profissionaisSimulados.forEach((prof, i) => {
+        // Distância simulada
+        const distancia = (Math.random() * 4 + 0.5).toFixed(1);
         
-        document.getElementById('empty-search').style.display = encontrou ? 'none' : 'block';
-        document.getElementById('btn-proximo').style.display = termo.length > 0 && !encontrou ? 'none' : 'block';
-    }
-
-    // Funções mantidas iguais
-    function renderizarSubcategorias(nomeCategoria) {
-        const lista = document.getElementById('lista-subcategorias');
-        lista.innerHTML = '';
-        const cat = ICONES[nomeCategoria];
-        cat.sub.forEach(sub => {
-            const btn = document.createElement('button');
-            btn.className = 'category-btn';
-            btn.innerHTML = `
-                <span class="category-icon ${iconClassSelecionada}">${iconeSelecionado}</span>
-                <div class="category-info"><h3>${sub}</h3><p>${nomeCategoria}</p></div>
-                <span class="category-arrow">›</span>
-            `;
-            btn.onclick = () => selecionarSubcategoria(sub);
-            lista.appendChild(btn);
+        // Adicionar marcador no mapa
+        const marker = new google.maps.Marker({
+            position: { lat: prof.lat, lng: prof.lng },
+            map: mapa,
+            icon: { url: 'data:image/svg+xml,' + encodeURIComponent(`<svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 24 24"><circle cx="12" cy="12" r="11" fill="#e65100" stroke="white" stroke-width="2"/><text x="12" y="16" text-anchor="middle" fill="white" font-size="14" font-weight="bold">${prof.avatar}</text></svg>`) },
+            title: prof.nome,
+            animation: google.maps.Animation.DROP,
+            zIndex: 500 - i
         });
+        marcadores.push(marker);
+        
+        // Card na lista
+        lista.innerHTML += `
+            <div class="prof-card-mapa" onclick="selecionarProfissional('${prof.nome}', '${distancia}')">
+                <div class="prof-avatar-mapa" style="background:#fff7ed;">${prof.avatar}</div>
+                <div class="prof-info-mapa">
+                    <div class="prof-nome-mapa">${prof.nome}</div>
+                    <div class="prof-detalhes-mapa">
+                        <span>⭐ ${prof.avaliacao}</span>
+                        <span>🔧 ${prof.categoria}</span>
+                    </div>
+                </div>
+                <div class="prof-distancia">${distancia} km<small>de distância</small></div>
+            </div>
+        `;
+    });
+}
+
+function selecionarProfissional(nome, distancia) {
+    if(confirm(`👷 ${nome}\n📏 ${distancia} km de distância\n\nDeseja solicitar este profissional?`)) {
+        alert(`✅ Solicitação enviada para ${nome}!\n\nEm breve ele entrará em contato.`);
+        fecharMapa();
     }
+}
 
-    function avancarParaPedido() {
-        if (!categoriaSelecionada) return;
-        const cat = ICONES[categoriaSelecionada];
-        const temSub = cat.sub && cat.sub.length > 0;
-        if (temSub) {
-            document.getElementById('titulo-subcategoria').innerText = `${iconeSelecionado} ${categoriaSelecionada}`;
-            renderizarSubcategorias(categoriaSelecionada);
-            document.getElementById('tela-categorias').style.display = 'none';
-            document.getElementById('tela-subcategorias').style.display = 'flex';
-        } else {
-            abrirTelaPedido();
-        }
-    }
+function fecharMapa() {
+    document.getElementById('mapa-screen').style.display = 'none';
+    document.getElementById('tela-pedido').style.display = 'flex';
+    if(mapa) { marcadores.forEach(m => m.setMap(null)); marcadores = []; mapa = null; }
+}
 
-    function selecionarSubcategoria(sub) { subcategoriaSelecionada = sub; veioDeSubcategoria = true; abrirTelaPedido(); }
-
-    function abrirTelaPedido() {
-        document.getElementById('tela-categorias').style.display = 'none';
-        document.getElementById('tela-subcategorias').style.display = 'none';
-        document.getElementById('tela-pedido').style.display = 'flex';
-        document.getElementById('titulo-pedido').innerText = subcategoriaSelecionada ? `${iconeSelecionado} ${subcategoriaSelecionada}` : `${iconeSelecionado} ${categoriaSelecionada}`;
-        solicitarLocalizacao();
-    }
-
-    function voltarParaCategorias() {
-        document.getElementById('tela-subcategorias').style.display = 'none';
-        document.getElementById('tela-categorias').style.display = 'flex';
-    }
-
-    function voltarDaTelaPedido() {
-        document.getElementById('tela-pedido').style.display = 'none';
-        if (veioDeSubcategoria) {
-            document.getElementById('titulo-subcategoria').innerText = `${iconeSelecionado} ${categoriaSelecionada}`;
-            renderizarSubcategorias(categoriaSelecionada);
-            document.getElementById('tela-subcategorias').style.display = 'flex';
-        } else {
-            document.getElementById('tela-categorias').style.display = 'flex';
-        }
-    }
-
-    function solicitarLocalizacao() {
-        const btn = document.getElementById('btn-gps');
-        const status = document.getElementById('location-status');
-        btn.style.display = 'flex'; btn.disabled = true;
-        btn.innerHTML = '<span style="display:inline-block;animation:spin 1s linear infinite;">⏳</span> Buscando...';
-        status.style.display = 'flex'; status.innerHTML = '<span style="color: #1a1a2e;">📡 Aguardando permissão...</span>';
-        document.getElementById('fallback-manual').style.display = 'none';
-        document.getElementById('local-confirmado').style.display = 'none';
-        localizacaoAtual = null;
-
-        if (!navigator.geolocation) { tratarErroGeolocalizacao('Geolocalização não suportada.'); return; }
-
-        navigator.geolocation.getCurrentPosition(
-            async (position) => {
-                const lat = position.coords.latitude;
-                const lon = position.coords.longitude;
-                status.innerHTML = '<span style="color: #1a1a2e;">🔄 Identificando bairro...</span>';
-                let nomeLocal = null;
-                try {
-                    const url = `https://nominatim.openstreetmap.org/reverse?format=jsonv2&lat=${lat}&lon=${lon}&zoom=18&addressdetails=1&accept-language=pt-BR`;
-                    const response = await fetch(url);
-                    const data = await response.json();
-                    const addr = data.address || {};
-                    nomeLocal = addr.neighbourhood || addr.suburb || addr.quarter || addr.city_district || addr.town || addr.city || addr.village;
-                    if (nomeLocal) {
-                        const cidade = addr.city || addr.town || addr.village || 'Natal';
-                        const estado = addr.state || 'RN';
-                        nomeLocal = `${nomeLocal}, ${cidade} - ${estado}`;
-                    }
-                } catch (e) {}
-                if (!nomeLocal) nomeLocal = `GPS (${lat.toFixed(4)}, ${lon.toFixed(4)})`;
-                localizacaoAtual = { lat, lon, nome: nomeLocal, tipo: 'gps' };
-                exibirLocalConfirmada(nomeLocal);
-            },
-            (error) => {
-                let msg = 'Não foi possível obter localização.';
-                if (error.code === error.PERMISSION_DENIED) msg = 'Permissão negada.';
-                else if (error.code === error.POSITION_UNAVAILABLE) msg = 'Sinal GPS indisponível.';
-                else if (error.code === error.TIMEOUT) msg = 'Tempo esgotado.';
-                tratarErroGeolocalizacao(msg);
-            },
-            { timeout: 15000, enableHighAccuracy: true, maximumAge: 0 }
-        );
-    }
-
-    function tratarErroGeolocalizacao(mensagem) {
-        document.getElementById('btn-gps').style.display = 'none';
-        document.getElementById('location-status').innerHTML = `<span style="color: var(--action);">️ ${mensagem}</span>`;
-        document.getElementById('fallback-manual').style.display = 'block';
-        document.getElementById('input-local').focus();
-    }
-
-    function confirmarLocalizacaoManual() {
-        const valor = document.getElementById('input-local').value.trim();
-        if (valor.length < 3) { alert('Digite um bairro ou CEP válido.'); return; }
-        const nomeFinal = valor.toLowerCase().includes('natal') ? valor : valor + ", Natal - RN";
-        localizacaoAtual = { nome: nomeFinal, tipo: 'manual' };
-        exibirLocalConfirmada(nomeFinal);
-    }
-
-    function exibirLocalConfirmada(texto) {
-        document.getElementById('btn-gps').style.display = 'none';
-        document.getElementById('location-status').style.display = 'none';
-        document.getElementById('fallback-manual').style.display = 'none';
-        document.getElementById('texto-local-confirmado').innerText = texto;
-        document.getElementById('local-confirmado').style.display = 'flex';
-    }
-
-    function resetarLocalizacao() {
-        localizacaoAtual = null;
-        document.getElementById('btn-gps').style.display = 'flex'; document.getElementById('btn-gps').disabled = false;
-        document.getElementById('btn-gps').innerHTML = '📡 Usar minha localização atual';
-        document.getElementById('location-status').style.display = 'flex'; document.getElementById('location-status').innerHTML = '';
-        document.getElementById('fallback-manual').style.display = 'none';
-        document.getElementById('local-confirmado').style.display = 'none';
-        document.getElementById('input-local').value = '';
-        setTimeout(() => solicitarLocalizacao(), 300);
-    }
-
-    function mudarQuantidade(valor) { quantidadeAtual += valor; if (quantidadeAtual < 1) quantidadeAtual = 1; if (quantidadeAtual > 10) quantidadeAtual = 10; document.getElementById('quantidade').innerText = quantidadeAtual; }
-
-    function buscarProfissionais() {
-        if (!localizacaoAtual) { alert('⚠️ Informe sua localização.'); return; }
-        const telaRadar = document.getElementById('telaRadar');
-        const localTexto = localizacaoAtual.tipo === 'gps' ? 'via GPS' : 'no bairro ' + localizacaoAtual.nome;
-        document.getElementById('radar-texto').innerText = `Buscando profissionais de ${categoriaSelecionada} ${localTexto}...`;
-        telaRadar.style.display = 'flex';
-        setTimeout(() => {
-            telaRadar.style.display = 'none';
-            alert(`🎉 Profissionais localizados!\n\n📍 ${localizacaoAtual.nome}\n🔧 ${subcategoriaSelecionada || categoriaSelecionada}`);
-        }, 4000);
-    }
-
-    renderizarCategorias();
+// INICIALIZAR
+renderizarCategorias();
 </script>
 </body>
 </html>
